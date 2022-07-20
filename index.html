@@ -17,8 +17,8 @@
   <body>
     <div class="container">
 
-      <header class="blog-head">
-        <div class="row flex-nowrap justify-content-between align-items-center">
+      <header class="blog_header">
+        <div class="blog_header_main">
 
           <div class="blog_head_left">
             <a class="link-secondary" href="#">Subscribe</a>
@@ -53,8 +53,8 @@
       </header>
 
 
-      <div class="nav-scroller py-1 mb-2">
-        <nav class="nav d-flex justify-content-between">
+      <div class="blog_head_sections">
+        <nav class="blog_head_nav_sections">
           <a class="p-2 link-secondary" href="index.html">General</a>
           <a class="p-2 link-secondary" href="index.html">Design</a>
           <a class="p-2 link-secondary" href="index.html">Web development</a>
@@ -67,75 +67,100 @@
 
 
     <main class="container">
-      <div class="container_last_habs bg-dark text-white rounded">
-        <div class="">
-          <h1 class="display-4 fst-italic">Last habs</h1>
-            <div class="row mb-2">
-              <div class="container_last_habs_blocks">
-                <div class="container_last_habs_block">
-                  <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                      <strong class="d-inline-block mb-2 text-primary">Web development</strong>
-                      <h3 class="mb-0">Featured post</h3>
-                      <div class="mb-1 text-muted">Nov 12</div>
-                      <p class="card-text mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="stretched-link">Continue reading</a>
-                    </div>
-                    <div class="col-auto d-none d-lg-block">
-                      <svg class="bd-placeholder-img" width="200" height="100%" xmlns="http://www.w3.org/2000/svg"
-                           role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                           focusable="false" style="text-anchor: middle;">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#55595c"/>
-                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                      </svg>
+      <div class="container_last_habs">
+        <div>
+          <h1 class="title_last_habs">Last habs</h1>
 
-                    </div>
-                  </div>
+
+          <div class="last_habs_block_parent row">
+            <div class="last_habs_block_child_main">
+
+
+              <div class="last_habs_block_child row">
+                <div class="last_habs_block_child_text">
+                  <strong class="last_habs_block_child_text_header">Web development</strong>
+                  <h3 class="last_habs_block_child_text_title">Featured post</h3>
+                  <div class="last_habs_block_child_data">July 20</div>
+                  <p class="last_habs_block_child_text_description">
+                    This is a wider card with supporting text below as a natural lead-in to additional content.
+                  </p>
+                  <a href="#" class="last_habs_block_child_text_continue">Continue reading...</a>
                 </div>
-                <div class="container_last_habs_block">
-                  <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
-                    <div class="col p-4 d-flex flex-column position-static">
-                      <strong class="d-inline-block mb-2 text-success">Design</strong>
-                      <h3 class="mb-0">Post title</h3>
-                      <div class="mb-1 text-muted">Nov 11</div>
-                      <p class="mb-auto">This is a wider card with supporting text below as a natural lead-in to additional content.</p>
-                      <a href="#" class="stretched-link">Continue reading</a>
-                    </div>
-                    <div class="col-auto d-none d-lg-block">
-                      <svg class="bd-placeholder-img" width="200" height="100%" xmlns="http://www.w3.org/2000/svg"
-                           role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice"
-                           focusable="false" style="text-anchor: middle;">
-                        <title>Placeholder</title>
-                        <rect width="100%" height="100%" fill="#55595c"/>
-                        <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                      </svg>
-                    </div>
-                  </div>
+                <div class="last_habs_block_child_block">
+                  <svg class="last_habs_block_child_block_svg"
+                       width="200"
+                       height="100%"
+                       xmlns="http://www.w3.org/2000/svg"
+                       role="img"
+                       aria-label="Placeholder: Thumbnail"
+                       preserveAspectRatio="xMidYMid slice"
+                       focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#55595c"/>
+                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                  </svg>
                 </div>
               </div>
+
+              <div class="last_habs_block_child row">
+                <div class="last_habs_block_child_text">
+                  <strong class="last_habs_block_child_text_header">Design</strong>
+                  <h3 class="last_habs_block_child_text_title">Post title</h3>
+                  <div class="last_habs_block_child_data">July 19</div>
+                  <p class="last_habs_block_child_text_description">
+                    This is a wider card with supporting text below as a natural lead-in to additional content.
+                  </p>
+                  <a href="#" class="last_habs_block_child_text_continue">Continue reading...</a>
+                </div>
+                <div class="last_habs_block_child_block">
+                  <svg class="last_habs_block_child_block_svg"
+                       width="200"
+                       height="100%"
+                       xmlns="http://www.w3.org/2000/svg"
+                       role="img"
+                       aria-label="Placeholder: Thumbnail"
+                       preserveAspectRatio="xMidYMid slice"
+                       focusable="false">
+                    <title>Placeholder</title>
+                    <rect width="100%" height="100%" fill="#55595c"/>
+                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                  </svg>
+                </div>
+              </div>
+
+
             </div>
-          <p class="lead mb-0"><a href="#" class="text-white fw-bold">Continue reading...</a></p>
+          </div>
+          <p class="last_habs_block_continue_r">
+            <a class="last_habs_block_continue_r_text" href="#">Continue reading...</a>
+          </p>
         </div>
       </div>
 
 
-      <div class="row g-5">
-        <div class="col-md-8">
-          <h2 class="blog-post-title">Tape</h2>
+      <div class="row">
+        <div class="main_center_block">
+          <h2 class="main_center_block_title">Tape</h2>
           <hr>
 
-          <article class="blog-post blog-post-title">
+          <article class="main_center_block_hab">
             <h3>
               HAB
             </h3>
+            <h4>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci dicta earum esse et impedit
+              nesciunt odit possimus recusandae sapiente voluptatum.
+            </h4>
           </article>
-          <hr>
 
-          <article class="blog-post blog-post-title">
+          <article class="main_center_block_hab">
             <h3>
               HAB
             </h3>
+            <h4>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores eaque esse et ipsam iure magni
+              minus necessitatibus, nisi obcaecati quas.
+            </h4>
           </article>
 
           <nav class="blog-pagination" aria-label="Pagination">
@@ -145,7 +170,7 @@
         </div>
 
 
-        <div class="col-md-4">
+        <div class="main_right_block">
           <div class="position-sticky" style="top: 2rem;">
             <div class="p-4 mb-3 bg-light rounded">
               <h4 class="fst-italic">About</h4>
@@ -178,9 +203,8 @@
             <div class="p-4">
               <h4 class="fst-italic">Elsewhere</h4>
               <ol class="list-unstyled">
-                <li><a href="#">GitHub</a></li>
-                <li><a href="#">Twitter</a></li>
-                <li><a href="#">Facebook</a></li>
+                <li><a href="https://github.com/VladSemiletov/habrmirror">GitHub</a></li>
+                <li><a href="https://discord.gg/qt2JH2g4">Discord</a></li>
               </ol>
             </div>
           </div>
@@ -190,10 +214,10 @@
     </main>
 
 
-    <footer class="blog-footer">
-      <p>Blog template built for <a href="https://getbootstrap.com/">Bootstrap</a> by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+    <footer class="blog_footer">
+      <p>Blog template built.</p>
       <p>
-        <a href="#">Back to top</a>
+        <a href="#" class="blog_footer_back">Back to top</a>
       </p>
     </footer>
 
