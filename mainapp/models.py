@@ -1,3 +1,26 @@
 from django.db import models
 
+
 # Create your models here.
+
+class HabCategory(models.Model):
+    """Модель описывает категории статей"""
+    name = models.CharField(max_length=64, unique=True)
+    description = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Hab Categories'
+
+    def __str__(self):
+        return self.name
+
+
+class Hab(models.Model):
+    """Модель описывает статьи"""
+    title = models.CharField(max_length=100, unique=True)
+    description = models.CharField(max_length=256, blank=True)
+    body = models.TextField()
+    category = models.ForeignKey(HabCategory, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.title} | {self.category}'
