@@ -75,14 +75,14 @@
           <div class="last_habs_block_parent row">
             <div class="last_habs_block_child_main">
 
-
-              <div class="last_habs_block_child row">
+                {%for i in hab%}
+                    <div class="last_habs_block_child row">
                 <div class="last_habs_block_child_text">
-                  <strong class="last_habs_block_child_text_header">Web development</strong>
-                  <h3 class="last_habs_block_child_text_title">Featured post</h3>
-                  <div class="last_habs_block_child_data">July 20</div>
+                  <strong class="last_habs_block_child_text_header">{{i.category}}</strong>
+                  <h3 class="last_habs_block_child_text_title">{{i.title}}</h3>
+                  <div class="last_habs_block_child_data">{{i.creat_time}}</div>
                   <p class="last_habs_block_child_text_description">
-                    This is a wider card with supporting text below as a natural lead-in to additional content.
+                    {{i.body}}
                   </p>
                   <a href="#" class="last_habs_block_child_text_continue">Continue reading...</a>
                 </div>
@@ -101,32 +101,33 @@
                   </svg>
                 </div>
               </div>
+                {%endfor%}
 
-              <div class="last_habs_block_child row">
-                <div class="last_habs_block_child_text">
-                  <strong class="last_habs_block_child_text_header">Design</strong>
-                  <h3 class="last_habs_block_child_text_title">Post title</h3>
-                  <div class="last_habs_block_child_data">July 19</div>
-                  <p class="last_habs_block_child_text_description">
-                    This is a wider card with supporting text below as a natural lead-in to additional content.
-                  </p>
-                  <a href="#" class="last_habs_block_child_text_continue">Continue reading...</a>
-                </div>
-                <div class="last_habs_block_child_block">
-                  <svg class="last_habs_block_child_block_svg"
-                       width="200"
-                       height="100%"
-                       xmlns="http://www.w3.org/2000/svg"
-                       role="img"
-                       aria-label="Placeholder: Thumbnail"
-                       preserveAspectRatio="xMidYMid slice"
-                       focusable="false">
-                    <title>Placeholder</title>
-                    <rect width="100%" height="100%" fill="#55595c"/>
-                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
-                  </svg>
-                </div>
-              </div>
+<!--              <div class="last_habs_block_child row">-->
+<!--                <div class="last_habs_block_child_text">-->
+<!--                  <strong class="last_habs_block_child_text_header">Design</strong>-->
+<!--                  <h3 class="last_habs_block_child_text_title">Post title</h3>-->
+<!--                  <div class="last_habs_block_child_data">July 19</div>-->
+<!--                  <p class="last_habs_block_child_text_description">-->
+<!--                    This is a wider card with supporting text below as a natural lead-in to additional content.-->
+<!--                  </p>-->
+<!--                  <a href="#" class="last_habs_block_child_text_continue">Continue reading...</a>-->
+<!--                </div>-->
+<!--                <div class="last_habs_block_child_block">-->
+<!--                  <svg class="last_habs_block_child_block_svg"-->
+<!--                       width="200"-->
+<!--                       height="100%"-->
+<!--                       xmlns="http://www.w3.org/2000/svg"-->
+<!--                       role="img"-->
+<!--                       aria-label="Placeholder: Thumbnail"-->
+<!--                       preserveAspectRatio="xMidYMid slice"-->
+<!--                       focusable="false">-->
+<!--                    <title>Placeholder</title>-->
+<!--                    <rect width="100%" height="100%" fill="#55595c"/>-->
+<!--                    <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>-->
+<!--                  </svg>-->
+<!--                </div>-->
+<!--              </div>-->
 
 
             </div>
