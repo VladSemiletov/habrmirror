@@ -1,6 +1,6 @@
 from django.contrib import admin
-from userapp.models import User, UserProfile
+from mainapp.models import HabCategory, Hab
 
 # Register your models here.
-admin.site.register(User)
-admin.site.register(UserProfile)
+admin.site.register(Hab)
+admin.site.register(HabCategory)
