@@ -30,7 +30,7 @@ class Hab(models.Model):
     category = models.ForeignKey(HabCategory, on_delete=models.CASCADE)
     creat_time = models.DateTimeField(auto_now_add=True)
     creat_time = models.DateTimeField(default=timezone.now)
-    AUTHOR = models.ForeignKey(User, on_delete=models.CASCADE)
+    AUTHOR = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
 
     def __str__(self):
         return f'{self.title} | {self.category}'
