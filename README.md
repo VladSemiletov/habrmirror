@@ -35,6 +35,13 @@ HabrMirror
 
 ```sqlite3 habrmirror.db
 ```
+Для запуска проекта локально выполним следующие команды:
+```
+~$ python3 manage.py makemigrations
+~$ python3 manage.py migrate
+~$ python3 manage.py runserver
+```
+
 
 
 
