@@ -6,7 +6,7 @@ from mainapp.service_mainapp import last_hub
 
 
 def index(request):
-    """Функция обновляет контекст для главной страницы и рендерит ее"""
+    """Функция мениет контексn для главной страницы и рендерит ее"""
     context = {}
     context_update(context, key='Title', value='HabrMirror')
     context_update(context, key='hab', value=last_hub())
