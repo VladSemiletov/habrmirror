@@ -7,3 +7,6 @@ class UserappConfig(AppConfig):
 
     def ready(self):
         import userapp.service.signals
+
+    def for_test(self):
+        pass
