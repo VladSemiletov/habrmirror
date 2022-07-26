@@ -7,10 +7,9 @@ def last_hub(n: int) -> QuerySet:
     """Функция выбирает n последних статей"""
     query_set = Hab.objects.all().order_by("creat_time")
     count = query_set.count()
-    if count < n:
-        return query_set
-    query_set = query_set[count-n:count:-n]
-    return query_set
+    if count > n:
+        query_set = query_set[count-n:count]
+    return query_set[::-1]
 
 
 def all_HabCategory() -> QuerySet:
