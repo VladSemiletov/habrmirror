@@ -12,7 +12,7 @@ def index(request: Request) -> HttpResponse:
     """Функция мениет контексn для главной страницы и рендерит ее"""
     context = {}
     context_update(context, key='Title', value='HabrMirror')
-    context_update(context, key='hab', value=last_hub())
+    context_update(context, key='hab', value=last_hub(5))
     context_update(context, key='hab_category', value=all_HabCategory())
     return render(request, 'mainapp/index.html', context)
 

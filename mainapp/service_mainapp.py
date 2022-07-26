@@ -3,11 +3,13 @@ from django.db.models import QuerySet
 from mainapp.models import Hab, HabCategory
 
 
-def last_hub() -> QuerySet:
-    """Функция выбирает последние 5 созданных статей"""
+def last_hub(n: int) -> QuerySet:
+    """Функция выбирает n последних статей"""
     query_set = Hab.objects.all().order_by("creat_time")
     count = query_set.count()
-    query_set = query_set[count-5:count:-1]
+    if count < n:
+        return query_set
+    query_set = query_set[count-n:count:-n]
     return query_set
 
 
