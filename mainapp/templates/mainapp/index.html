@@ -26,12 +26,12 @@
           <ul id="menu">
             <li><a href="{% url 'index' %}">Главная</a></li>
             {%for category in hab_category%}
-            <li><a href="#">{{category.name}}</a></li>
+            <li><a href="{% url 'category' category.id  %}">{{category.name}}</a></li>
             {%endfor%}
             {% if user.is_authenticated %}
-             <li><a href="#">Вход</a></li>
+             <li><a href="#">Выход</a></li>
             {% else %}
-              <li><a href="#">Выход</a></li>
+              <li><a href="#">Вход</a></li>
             {% endif %}
 
 
@@ -47,6 +47,7 @@
         </div>
         <div class="header_center">
           <a class="header_title line-after-heading" href="{% url 'index' %}">Habrmirror</a>
+
         </div>
 
 
@@ -81,7 +82,9 @@
     <main class="container">
       <div class="container_main">
         <div class="container_main_block">
-          <h4 class="container_main_block_title"><b>About</b></h4>
+          <h4 class="container_main_block_title"><b>About {{user.username}}
+          {{hab.0.category.id}}</b></h4>
+
             <p class="container_main_block_text">
               Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur earum eius eligendi,
               itaque labore neque obcaecati pariatur, quas quasi quisquam recusandae saepe. Animi aspernatur
@@ -97,6 +100,7 @@
       <div class="row">
         <div class="main_center_block">
           <h2 class="main_center_block_title">Все потоки</h2>
+
           {%for i in hab%}
           <hr>
           <article class="main_center_block_hab">
@@ -104,7 +108,7 @@
             <h3 class="main_center_block_hab_text"><b>
               {{i.title}}
             </b></h3>
-            <p class="main_center_block_hab_date_publ">Тема: <a href="href">{{i.category}}</a></p>
+            <p class="main_center_block_hab_date_publ">Тема: <a href="{% url 'category' i.category.id  %}">{{i.category}}</a></p>
 
 <!--            <div class="demo">-->
 <!--              <div class="main_center_block_hab_img_grid">-->
