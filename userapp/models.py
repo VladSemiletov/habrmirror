@@ -31,3 +31,4 @@ class UserProfile(models.Model):
     about_me = models.TextField(verbose_name='О себе', max_length=512, blank=True)
     gender = models.CharField(choices=GENDER_CHOICES, blank=True, max_length=1, verbose_name='пол')
 
+
