@@ -15,68 +15,7 @@
 
   <body>
 
-    <div>
-      <nav role="navigation">
-        <div id="menuToggle">
-          <input type="checkbox" />
-          <span></span>
-          <span></span>
-          <span></span>
-
-          <ul id="menu">
-            <li><a href="{% url 'index' %}">Главная</a></li>
-            {%for category in hab_category%}
-            <li><a href="{% url 'category' category.id  %}">{{category.name}}</a></li>
-            {%endfor%}
-            {% if user.is_authenticated %}
-             <li><a href="{% url 'logout' %}">Выход</a></li>
-            {% else %}
-              <li><a href="#">Вход</a></li>
-            {% endif %}
-
-
-          </ul>
-        </div>
-
-      </nav>
-    </div>
-
-    <header>
-        <div class="header_center">
-          <a class="header_title"></a>
-        </div>
-        <div class="header_center">
-          <a class="header_title line-after-heading" href="{% url 'index' %}">Habrmirror</a>
-
-        </div>
-
-
-        <div class="header_right">
-          <a class="link-secondary" href="#" aria-label="Search">
-            <svg class="mx-3"
-                 xmlns="http://www.w3.org/2000/svg"
-                 width="20"
-                 height="20"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-linecap="round"
-                 stroke-linejoin="round"
-                 stroke-width="2"
-                 role="img"
-                 viewBox="0 0 24 24">
-              <title>Search</title>
-              <circle cx="10.5" cy="10.5" r="7.5"/>
-              <path d="M21 21l-5.2-5.2"/>
-            </svg>
-          </a>
-          <a class="btn btn-sm btn-outline-secondary"
-             href="#"
-             style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">Sign up
-          </a>
-        </div>
-
-      </div>
-    </header>
+{% include 'mainapp/includes/head_menu.html' %}
 
 
     <main class="container">
