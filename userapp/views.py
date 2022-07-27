@@ -12,3 +12,8 @@ def logout(request: Request) -> HttpResponseRedirect:
     """Функция выхода из аккаунта"""
     auth.logout(request)
     return HttpResponseRedirect(reverse('index'))
+
+def login(request: Request) -> HttpResponseRedirect:
+    """Функция авторизации"""
+    pass
+    return HttpResponseRedirect(reverse('index'))
