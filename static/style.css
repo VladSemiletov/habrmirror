@@ -310,11 +310,27 @@ header {
 
 /*start  -->  authapp*/
 .container_authapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12rem 0;
+    background-color: #f5f5f5;
+}
+
+.fw-normal {
+  font-weight: 400 !important;
+  text-align: center;
+}
+
+.checkbox {
   display: flex;
   align-items: center;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #f5f5f5;
+  margin: 0.5rem 0 1rem;
+}
+
+.form-floating {
+  position: relative;
+  margin-bottom: 0.1rem;
 }
 
 
