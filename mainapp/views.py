@@ -9,7 +9,7 @@ from mainapp.service_mainapp import last_hub, all_HabCategory
 
 
 def index(request: Request) -> HttpResponse:
-    """Функция мениет контексn для главной страницы и рендерит ее"""
+    """Функция мениет контекст для главной страницы и рендерит ее"""
     context = {}
     context_update(context, key='Title', value='HabrMirror')
     context_update(context, key='hab', value=last_hub(5))

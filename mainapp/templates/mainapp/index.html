@@ -29,7 +29,7 @@
             <li><a href="{% url 'category' category.id  %}">{{category.name}}</a></li>
             {%endfor%}
             {% if user.is_authenticated %}
-             <li><a href="#">Выход</a></li>
+             <li><a href="{% url 'logout' %}">Выход</a></li>
             {% else %}
               <li><a href="#">Вход</a></li>
             {% endif %}
