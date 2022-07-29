@@ -48,7 +48,7 @@ class HabUserRegisterForm(UserCreationForm):
         return data
 
 
-class HabUserEditForm(UserChangeForm):
+class HabUserAccountForm(UserChangeForm):
     class Meta:
         model = HabUser
         fields = ('username', 'first_name', 'email', 'age', 'avatar', 'password')

@@ -8,9 +8,9 @@
 {% endblock %}
 
 {% block content %}
-    <form class="form-horizontal" action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
+    <form class="form-horizontal" action="{% url 'auth:account' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ edit_form.as_p }}
+        {{ account_form.as_p }}
         <input type="submit" class="btn btn-primary" value="Редактировать">
     </form>
     <hr>

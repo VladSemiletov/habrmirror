@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
 
-from authapp.forms import HabUserLoginForm, HabUserRegisterForm, HabUserEditForm
+from authapp.forms import HabUserLoginForm, HabUserRegisterForm, HabUserAccountForm
 
 
 def login(request):
@@ -48,16 +48,16 @@ def register(request):
     return render(request, 'authapp/register.html', context)
 
 
-def edit(request):
+def account(request):
     if request.method == 'POST':
-        edit_form = HabUserEditForm(request.POST, request.FILES, instance=request.user)
-        if edit_form.is_valid():
-            edit_form.save()
+        account_form = HabUserAccountForm(request.POST, request.FILES, instance=request.user)
+        if account_form.is_valid():
+            account_form.save()
             return HttpResponseRedirect(reverse('index'))
     else:
-        edit_form = HabUserEditForm(instance=request.user)
+        account_form = HabUserAccountForm(instance=request.user)
 
     context = {
-        'edit_form': edit_form
+        'account_form': account_form
     }
-    return render(request, 'authapp/edit.html', context)
+    return render(request, 'authapp/account.html', context)
