@@ -3,11 +3,11 @@ from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
 
-from authapp.forms import ShopUserLoginForm, ShopUserRegisterForm, ShopUserEditForm
+from authapp.forms import HabUserLoginForm, HabUserRegisterForm, HabUserEditForm
 
 
 def login(request):
-    login_form = ShopUserLoginForm(data=request.POST or None)
+    login_form = HabUserLoginForm(data=request.POST or None)
     next_param = request.GET.get('next', '')
 
     if request.method == 'POST' and login_form.is_valid():
@@ -35,12 +35,12 @@ def logout(request):
 
 def register(request):
     if request.method == 'POST':
-        register_form = ShopUserRegisterForm(request.POST, request.FILES)
+        register_form = HabUserRegisterForm(request.POST, request.FILES)
         if register_form.is_valid():
             register_form.save()
             return HttpResponseRedirect(reverse('index'))
     else:
-        register_form = ShopUserRegisterForm()
+        register_form = HabUserRegisterForm()
 
     context = {
         'register_form': register_form
@@ -50,12 +50,12 @@ def register(request):
 
 def edit(request):
     if request.method == 'POST':
-        edit_form = ShopUserEditForm(request.POST, request.FILES, instance=request.user)
+        edit_form = HabUserEditForm(request.POST, request.FILES, instance=request.user)
         if edit_form.is_valid():
             edit_form.save()
             return HttpResponseRedirect(reverse('index'))
     else:
-        edit_form = ShopUserEditForm(instance=request.user)
+        edit_form = HabUserEditForm(instance=request.user)
 
     context = {
         'edit_form': edit_form

@@ -1,23 +1,26 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django import forms
-from authapp.models import ShopUser
+
+from authapp.models import HabUser
 
 
-class ShopUserLoginForm(AuthenticationForm):
+class HabUserLoginForm(AuthenticationForm):
     class Meta:
-        model = ShopUser
+        model = HabUser
         fields = ('username', 'password')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        print(self.fields.items())
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+            # field.widget.attrs['placeholder'] = field_name
             field.help_text = ''
 
 
-class ShopUserRegisterForm(UserCreationForm):
+class HabUserRegisterForm(UserCreationForm):
     class Meta:
-        model = ShopUser
+        model = HabUser
         fields = ('username', 'first_name', 'last_name', 'email', 'age', 'avatar', 'password1', 'password2')
 
     def __init__(self, *args, **kwargs):
@@ -45,9 +48,9 @@ class ShopUserRegisterForm(UserCreationForm):
         return data
 
 
-class ShopUserEditForm(UserChangeForm):
+class HabUserEditForm(UserChangeForm):
     class Meta:
-        model = ShopUser
+        model = HabUser
         fields = ('username', 'first_name', 'email', 'age', 'avatar', 'password')
 
     def __init__(self, *args, **kwargs):
