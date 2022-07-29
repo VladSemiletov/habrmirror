@@ -1,0 +1,39 @@
+{% extends 'authapp/base.html' %}
+{% load static %}
+
+{% block content %}
+    <form action="{% url 'auth:login' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-floating">
+            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+    </form>
+
+    <p class="mt-4 text-muted"><hr><a href="{% url 'auth:register' %}">Регистрация</a></p>
+
+
+<!--    <form action="{% url 'auth:login' %}" method="post" enctype="multipart/form-data">-->
+<!--        {% csrf_token %}-->
+<!--        {{ login_form.as_p }}-->
+
+<!--        {% if next %}-->
+<!--            <input type="hidden" name="next" value="{{ next }}">-->
+<!--        {% endif %}-->
+
+<!--        <input type="submit" class="btn btn-primary" value="Войти">-->
+<!--    </form>-->
+<!--    <hr>-->
+<!--    <a href="{% url 'auth:register' %}">Регистрация</a>-->
+{% endblock %}
