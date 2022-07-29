@@ -56,7 +56,7 @@ header {
 }
 
 #menuToggle a:hover {
-  color: #6c757d;
+    color: #6c757d;
 }
 
 #menuToggle input {
@@ -153,7 +153,9 @@ header {
     color: white;
     text-decoration: none;
 }
-.header_title:hover {color: #6c757d;}
+.header_title:hover {
+    color: #6c757d;
+}
 
 
 .header_right {
@@ -168,6 +170,10 @@ header {
 
 .header_right_user {
     margin: 0 20px 0 10px;
+
+}
+.header_right_user:hover img {
+    filter: brightness(40%)
 }
 /*end  -->  header*/
 
@@ -257,8 +263,6 @@ header {
 .main_center_block_hab_btm_a:hover {
     text-decoration: underline;
 }
-
-
 
 
 
