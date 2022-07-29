@@ -42,7 +42,7 @@
                 <a class="header_title"></a>
             </div>
             <div class="header_center">
-                <a class="header_title line-after-heading" href="/">Habrmirror</a>
+                <a class="header_title line-after-heading" href="{% url 'authapp:logout' %}">Habrmirror</a>
             </div>
 
 
@@ -65,15 +65,24 @@
                     </svg>
                 </a>
 
-                <a class="header_right_user" href="/auth/edit/" aria-label="User">
+                {% if user.is_authenticated %}
+                <a class="header_right_user" href="{% url 'authapp:edit' %}" aria-label="User">
                     <img src="{% static 'img/user_24.png' %}" alt="user">
                 </a>
 
                 <a class="btn btn-sm btn-outline-secondary"
-                 href="/auth/login/"
-                 style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">
-                    Sign up
+                     href="{% url 'authapp:logout' %}"
+                     style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">
+                    Exit
                 </a>
+                {% else %}
+                <a class="btn btn-sm btn-outline-secondary"
+                     href="{% url 'authapp:login' %}"
+                     style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">
+                    Sing up
+                </a>
+                {% endif %}
+
             </div>
         </header>
 

@@ -63,14 +63,23 @@
             </svg>
           </a>
 
-          <a class="header_right_user" href="/auth/edit/" aria-label="User">
+          {% if user.is_authenticated %}
+          <a class="header_right_user" href="{% url 'authapp:edit' %}" aria-label="User">
             <img src="{% static 'img/user_24.png' %}" alt="user">
           </a>
 
           <a class="btn btn-sm btn-outline-secondary"
-             href="/auth/login/"
-             style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">Sign up
+             href="{% url 'authapp:logout' %}"
+             style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">
+            Exit
           </a>
+          {% else %}
+          <a class="btn btn-sm btn-outline-secondary"
+             href="{% url 'authapp:login' %}"
+             style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">
+            Sing up
+          </a>
+          {% endif %}
         </div>
 
       </div>
@@ -150,6 +159,34 @@
               <div class="main_center_block_hab_btm"><a class="main_center_block_hab_btm_a" href="">Комментарии</a></div>
             </div>
           </article>
+
+
+          {%for i in hab%}
+          <hr>
+          <article class="main_center_block_hab">
+            <p class="main_center_block_hab_date_publ">Опубликовал: {{i.author}} {{i.creat_time}} </p>
+            <h3 class="main_center_block_hab_text"><b>
+              {{i.title}}
+            </b></h3>
+            <p class="main_center_block_hab_date_publ">Тема: <a href="{% url 'category' i.category.id  %}">{{i.category}}</a></p>
+
+            <div class="demo">
+              <div class="main_center_block_hab_img_grid">
+                <div class="wrapper">
+                  <img class="main_center_block_hab_img" src="https://kartinkin.net/uploads/posts/2021-07/1625571446_4-kartinkin-com-p-elektrotekhnika-fon-krasivie-foni-4.jpg%22%3E--%3E">
+                </div>
+              </div>
+            </div>
+            <h4 class="main_center_block_hab_text">
+              <p class="text-break">{{i.body|slice:":150"}}...</p>
+            </h4>
+            <div class="main_center_block_hab_bottoms">
+              <div class="main_center_block_hab_btm"><a class="main_center_block_hab_btm_a" href="">Лайк</a></div>
+              <div class="main_center_block_hab_btm"><a class="main_center_block_hab_btm_a" href="">Комментарии</a></div>
+            </div>
+          </article>
+
+          {%endfor%}
 
 
           <nav class="blog-pagination" aria-label="Pagination">

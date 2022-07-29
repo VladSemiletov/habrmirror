@@ -16,6 +16,7 @@ def index(request: Request) -> HttpResponse:
     context_update(context, key='hab_category', value=all_HabCategory())
     return render(request, 'mainapp/index.html', context)
 
+
 def category(request: Request, pk: int) -> HttpResponse:
     pass
 
