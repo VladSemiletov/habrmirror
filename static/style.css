@@ -3,6 +3,15 @@ body{
     font-family: 'NAMU Extra-light 200'
 }
 
+hr {
+    background-image: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.8), transparent);
+    border: 0;
+    height: 1px;
+    margin: 22px 0 22px 0;box-sizing:
+    content-box;
+    display: block;
+}
+
 
 /*start  -->  header*/
 header {
