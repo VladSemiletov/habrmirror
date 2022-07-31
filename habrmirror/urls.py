@@ -21,5 +21,4 @@ urlpatterns = [
     path('', index, name='index'),
     path('admin/', admin.site.urls),
     path('category/<int:pk>', category, name='category'),
-    path('notification/', include('notificationapp.urls', namespace='notification')),
 ]
