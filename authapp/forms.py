@@ -78,3 +78,17 @@ class HabUserAccountForm(UserChangeForm):
         if len(data) > 24:
             raise forms.ValidationError('Слишком длинное имя.')
         return data
+
+
+class HabUserHabsForm(UserChangeForm):
+    class Meta:
+        model = HabUser
+        fields = ('username', 'first_name', 'email', 'age', 'avatar', 'password')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+            field.help_text = ''
+            if field_name == 'password':
+                field.widget = forms.HiddenInput()
