@@ -7,7 +7,6 @@ from django.db import models
 from django.utils import timezone
 
 from authapp.models import HabUser
-# from userapp.models import User
 
 
 class HabCategory(models.Model):
@@ -24,13 +23,13 @@ class HabCategory(models.Model):
 
 class Hab(models.Model):
     """Модель описывает статьи"""
+    author = models.ForeignKey(HabUser, on_delete=models.CASCADE, default=0)
     title = models.CharField(max_length=100, unique=True)
     description = models.CharField(max_length=256, blank=True)
     body = models.TextField()
     category = models.ForeignKey(HabCategory, on_delete=models.CASCADE)
     creat_time = models.DateTimeField(auto_now_add=True)
     creat_time = models.DateTimeField(default=timezone.now)
-    author = models.ForeignKey(HabUser, on_delete=models.CASCADE, default=0)
 
     def __str__(self):
         return f'{self.title} | {self.category}'

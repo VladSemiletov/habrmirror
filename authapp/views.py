@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
 
-from authapp.forms import HabUserLoginForm, HabUserRegisterForm, HabUserAccountForm
+from authapp.forms import HabUserLoginForm, HabUserRegisterForm, HabUserAccountForm, HabForm
 
 
 def login(request):
@@ -53,7 +53,7 @@ def account(request):
         account_form = HabUserAccountForm(request.POST, request.FILES, instance=request.user)
         if account_form.is_valid():
             account_form.save()
-            return HttpResponseRedirect(reverse('index'))
+            return HttpResponseRedirect(reverse('account'))
     else:
         account_form = HabUserAccountForm(instance=request.user)
 
@@ -61,3 +61,18 @@ def account(request):
         'account_form': account_form
     }
     return render(request, 'authapp/account/account.html', context)
+
+
+def habs(request):
+    if request.method == 'POST':
+        hab_form = HabForm(request.POST)
+        if hab_form.is_valid():
+            return HttpResponseRedirect(reverse('habs'))
+    else:
+        hab_form = HabForm()
+
+    context = {
+        'hab_form': hab_form
+    }
+    return render(request, 'authapp/account/habs.html', context)
+
