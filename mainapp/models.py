@@ -34,3 +34,15 @@ class Hab(models.Model):
 
     def __str__(self):
         return f'{self.title} | {self.category}'
+
+
+class Comment(models.Model):
+    """Модель описывает комментарии к статьям"""
+    hab = models.ForeignKey(Hab, on_delete=models.CASCADE, verbose_name='HAB', default=0)
+    author = models.ForeignKey(HabUser, on_delete=models.CASCADE, default=0)
+    creat_time = models.DateTimeField(auto_now_add=True)
+    text = models.TextField(verbose_name="Комментарий")
+    status = models.BooleanField(verbose_name="Видимость комментария", default=False)
+
+    def __str__(self):
+        return self.author
