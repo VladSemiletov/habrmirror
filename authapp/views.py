@@ -53,7 +53,7 @@ def account(request):
         account_form = HabUserAccountForm(request.POST, request.FILES, instance=request.user)
         if account_form.is_valid():
             account_form.save()
-            return HttpResponseRedirect(reverse('account'))
+            return HttpResponseRedirect(reverse('index'))
     else:
         account_form = HabUserAccountForm(instance=request.user)
 

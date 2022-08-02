@@ -80,6 +80,15 @@ class HabUserAccountForm(UserChangeForm):
             raise forms.ValidationError('Слишком длинное имя.')
         return data
 
+    def clean_avatar(self):
+        data = self.cleaned_data['avatar']
+        print(bool(data))
+        if data:
+            return data
+
+        data = "{% static 'img/user_photo.png' %}"
+        return data
+
 
 class HabForm(forms.ModelForm):
 
