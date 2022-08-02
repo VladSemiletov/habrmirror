@@ -66,21 +66,21 @@
         </a>
 
         {% if user.is_authenticated %}
-        <a class="header_right_user" href="{% url 'authapp:account' %}" aria-label="User">
-          <img src="{% static 'img/user_24.png' %}" alt="user">
-        </a>
+          <a class="header_right_user" href="{% url 'authapp:account' %}" aria-label="User">
+            <img src="{% static 'img/user_24.png' %}" alt="user">
+          </a>
 
-        <a class="btn btn-sm btn-outline-secondary"
-           href="{% url 'authapp:logout' %}"
-           style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">
-          Выйти
-        </a>
+          <a class="btn btn-sm btn-outline-secondary"
+             href="{% url 'authapp:logout' %}"
+             style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">
+            Выйти
+          </a>
         {% else %}
-        <a class="btn btn-sm btn-outline-secondary"
-           href="{% url 'authapp:login' %}"
-           style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">
-          Войти
-        </a>
+          <a class="btn btn-sm btn-outline-secondary"
+             href="{% url 'authapp:login' %}"
+             style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">
+            Войти
+          </a>
         {% endif %}
       </div>
     </header>

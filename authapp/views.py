@@ -25,7 +25,7 @@ def login(request):
         'login_form': login_form,
         'next': next_param
     }
-    return render(request, 'authapp/login.html', context)
+    return render(request, 'authapp/auth/login.html', context)
 
 
 def logout(request):
@@ -45,7 +45,7 @@ def register(request):
     context = {
         'register_form': register_form
     }
-    return render(request, 'authapp/register.html', context)
+    return render(request, 'authapp/auth/register.html', context)
 
 
 def account(request):
@@ -60,4 +60,4 @@ def account(request):
     context = {
         'account_form': account_form
     }
-    return render(request, 'authapp/account.html', context)
+    return render(request, 'authapp/account/account.html', context)
