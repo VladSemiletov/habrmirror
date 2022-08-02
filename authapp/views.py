@@ -76,3 +76,9 @@ def habs(request):
     }
     return render(request, 'authapp/account/habs.html', context)
 
+
+def messages(request):
+    if request.method == 'POST':
+        return HttpResponseRedirect(reverse('messages'))
+
+    return render(request, 'authapp/account/messages.html')
