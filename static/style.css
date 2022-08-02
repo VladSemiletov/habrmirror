@@ -430,9 +430,8 @@ header {
 .container_account {
     display: flex;
     justify-content: center;
-    align-items: center;
     width: 100%;
-    height: auto;
+    height: 200vh;
     flex-wrap: wrap;
     margin: 4.5rem 0 0;
 }
@@ -442,21 +441,55 @@ header {
     flex-direction: column;
 }
 
+.container_account_main_h2 {
+    margin: 15vh 0 0 23vh;
+    color: #6c757d;
+}
+
 .account_left {
     background: #313a4b;
+    border: 1px solid #000;
     color: white;
     width: 25vh;
     height: 100vh;
     position: fixed;
     top: 4.5rem;
     left: 0;
-    padding: 20px;
-    border: 1px solid #000;
+    padding: 40px 15px;
+}
+
+.account_left_p {
+    margin-bottom: 30px;
+    padding: 15px 0;
+    color: white;
+    text-decoration: none;
+}
+
+.account_left_p:hover {
+    color: #6c757d;
 }
 
 .account_right {
-    margin-top: 20px;
-    padding: 30px 0 10px calc(25vh + 20px);
-    height: 200vh;
+    width: 120vh;
+    margin: 3vh 0 0 23vh;
+    padding: 8vh;
+    background: white;
+    border-radius: 2px;
+}
+#menuAccount {
+    background: #ededed;
+    transform: translate(-100%, 0);
+    transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    position: absolute;
+    padding: 3rem;
+    width: 30rem;
+    margin-top: 1.5rem;
+    left: 5rem;
+    height: 26rem;
+}
+#menuAccount li {
+    padding: 20px 0;
+    font-size: 22px;
+    list-style-type: none;
 }
 /*end  -->  account*/
