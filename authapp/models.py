@@ -20,3 +20,6 @@ class UserProfile(models.Model):
     user = models.OneToOneField(HabUser, unique=True, null=False, db_index=True, on_delete=models.CASCADE)
     about_me = models.TextField(verbose_name='О себе', max_length=512, blank=True)
     gender = models.CharField(choices=GENDER_CHOICES, blank=True, max_length=1, verbose_name='пол')
+
+
+

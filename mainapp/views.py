@@ -20,3 +20,6 @@ def index(request: Request) -> HttpResponse:
 def category(request: Request, pk: int) -> HttpResponse:
     pass
 
+
+def comment(request: Request, pk: int) -> HttpResponse:
+    pass
