@@ -4,9 +4,9 @@ from django.utils.timezone import now
 from django.db.models.signals import post_save, m2m_changed
 from django.dispatch import receiver
 
-from mainapp.models import Hab
+from habapp.models import Hab
 from authapp.models import HabUser
-from mainapp.models import Comment
+from commentapp.models import Comments
 
 
 class NotifyUser(models.Model):
@@ -46,16 +46,16 @@ class NotifyUser(models.Model):
         self.is_read = True
         self.save()
 
-    @receiver(post_save, sender=Comment)
+    @receiver(post_save, sender=Comments)
     def add_comment_notify(sender, instance, created, **kwargs):
         """ Создание уведомления при новом комментарии статьи """
 
         if created:
             notify = NotifyUser()
-            notify.user_to = HabUser.objects.get(pk=instance.comment_article.author.pk)
+            notify.user_to = HabUser.objects.get(pk=instance.comment_hab.author.pk)
             notify.from_user = HabUser.objects.get(pk=instance.comment_author.pk)
             notify.type_notify = notify.COMMENT
-            notify.hab = Hab.objects.get(uid=instance.comment_article.uid)
+            notify.hab = Hab.objects.get(uid=instance.comment_hab.uid)
             notify.save()
 
     @receiver(post_save, sender=Hab)
@@ -96,7 +96,7 @@ class NotifyUser(models.Model):
 
         notify.user_to = HabUser.objects.get(pk=instance.author.pk)
         notify.from_user = HabUser.objects.get(pk=from_user)
-        notify.article = Hab.objects.get(uid=instance.uid)
+        notify.hab = Hab.objects.get(uid=instance.uid)
 
         if kwargs['action'] == 'post_add':
             notify.type_notify = notify.LIKE

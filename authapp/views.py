@@ -2,8 +2,15 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.urls import reverse
-
+from django.views.generic import TemplateView, DetailView
 from authapp.forms import HabUserLoginForm, HabUserRegisterForm, HabUserAccountForm
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from notificationapp.models import NotifyUser
+from authapp.models import HabUser
+from mainapp.models import Hab
+from ratingapp.models import AuthorRating
+
+
 
 
 def login(request):
@@ -61,3 +68,28 @@ def account(request):
         'account_form': account_form
     }
     return render(request, 'authapp/account/account.html', context)
+
+class UserDetailView(DetailView):
+    """ Страница профиля """
+    model = HabUser
+    template_name = 'authapp/account/account.html'
+    context_object_name = 'object'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        articles = Hab.objects.all().filter(author=self.object)
+        context['articles_draft'] = articles.filter(status='DF')
+        context['articles_moder'] = articles.filter(status='PB', approve=False)
+        context['articles_public'] = articles.filter(status='PB', approve=True)
+
+        try:
+            rating = get_object_or_404(AuthorRating, author=self.object)
+            context['rating'] = rating.value()
+
+        except Exception:
+            #TODO обработать конкретное исключение
+            pass
+        context['notify'] = NotifyUser.objects.all().filter(user_to=self.object)
+
+        return context

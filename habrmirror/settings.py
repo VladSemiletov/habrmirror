@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     # 'userapp',
     'authapp',
     'notificationapp',
+    'commentapp',
+    'ratingapp',
 ]
 
 AUTH_USER_MODEL = 'authapp.HabUser'
