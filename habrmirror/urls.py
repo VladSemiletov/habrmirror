@@ -14,8 +14,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-
-from django.urls import path, include
+from django.urls import path
+from django.conf.urls import include
 from mainapp.views import index, category, comment
 
 
@@ -28,6 +28,7 @@ urlpatterns = [
     path('category/<int:pk>', category, name='category'),
     path('auth/', include('authapp.urls', namespace='auth')),
     path('comment/<int:pk>', comment, name='comment'),
+    path('notification/', include('notificationapp.urls', namespace='notify')),
 ]
 
 if settings.DEBUG:
