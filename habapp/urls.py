@@ -1,21 +1,21 @@
 from django.urls import path
-from articleapp.views import IndexView, ArticleDetailView, \
-    ArticleCreateView, ArticleUpdateView, ArticleDeleteView, like_art, \
-    CategoryArticleView, ArticleListView, ArticlePublished
+from habapp.views import IndexView, HabDetailView, \
+    HabCreateView, HabUpdateView, HabDeleteView, like_hab, \
+    CategoryHabView, HabListView, HabPublished
 
 
-app_name = 'articleapp'
+app_name = 'habapp'
 
 urlpatterns = [
     path('', IndexView.as_view(), name='main'),
     path('index/', IndexView.as_view(), name='main'),
-    path('article/new/', ArticleCreateView.as_view(), name='add'),
-    path('article/list/', ArticleListView.as_view(), name='list'),
-    path('article/<uuid:pk>/', ArticleDetailView.as_view(), name='detail'),
-    path('article/<uuid:pk>/edit/', ArticleUpdateView.as_view(), name='edit'),
-    path('article/<uuid:pk>/delete/', ArticleDeleteView.as_view(),
+    path('hab/new/', HabCreateView.as_view(), name='add'),
+    path('hab/list/', HabListView.as_view(), name='list'),
+    path('hab/<uuid:pk>/', HabDetailView.as_view(), name='detail'),
+    path('hab/<uuid:pk>/edit/', HabUpdateView.as_view(), name='edit'),
+    path('hab/<uuid:pk>/delete/', HabDeleteView.as_view(),
          name='delete'),
-    path('article/<uuid:pk>/like/', like_art, name='like-art'),
-    path('article/category/<int:pk>', CategoryArticleView.as_view(), name='article_category'),
-    path('article/<uuid:pk>/published/', ArticlePublished.as_view(), name='public'),
+    path('hab/<uuid:pk>/like/', like_hab, name='like-art'),
+    path('hab/category/<int:pk>', CategoryHabView.as_view(), name='hab_category'),
+    path('hab/<uuid:pk>/published/', HabPublished.as_view(), name='public'),
 ]

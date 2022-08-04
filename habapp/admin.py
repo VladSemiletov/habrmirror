@@ -1,5 +1,5 @@
 from django.contrib import admin
-from articleapp.models import Category, Article, Like
+from habapp.models import Category, Hab, Like
 
 
 class HabAdmin(admin.ModelAdmin):
@@ -31,5 +31,5 @@ class HabAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Category)
-admin.site.register(Article, HabAdmin)
+admin.site.register(Hab, HabAdmin)
 admin.site.register(Like)

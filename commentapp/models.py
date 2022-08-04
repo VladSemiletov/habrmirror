@@ -1,6 +1,6 @@
 from django.db import models
 from authapp.models import HabUser
-from mainapp.models import Hab
+from habapp.models import Hab
 from .middleware import get_current_user
 
 
@@ -24,7 +24,7 @@ class FilterComments(models.Manager):
             models.Q(comment_moderation=True,
                      comment_author=get_current_user()) |
             models.Q(comment_moderation=False,
-                     comment_article__author=get_current_user()) |
+                     comment_hab__author=get_current_user()) |
             models.Q(comment_moderation=True))
 
 

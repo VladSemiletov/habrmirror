@@ -15,7 +15,7 @@ from ratingapp.models import HabRating
 from ratingapp.queryset import add_rating
 from .mixins import UserIsNoBlockMixin
 
-# Отображение содержимого из модели Article
+# Отображение содержимого из модели Hab
 class IndexView(ListView):
     """
     класс - Index
@@ -71,7 +71,7 @@ class HabDetailView(CommentView, FormMixin, DetailView):
             context['form2'] = self.second_form_class(instance=self.object)
 
         try:
-            rating = get_object_or_404(HabRating, article=self.object)
+            rating = get_object_or_404(HabRating, hab=self.object)
             context['rating'] = rating.value()
         except Exception:
             # TODO обработать конкретное исключение
@@ -82,7 +82,7 @@ class HabDetailView(CommentView, FormMixin, DetailView):
 
 class HabCreateView(LoginRequiredMixin, CreateView):
     """
-    класс - ArticleCreate
+    класс - HabCreate
     """
     model = Hab
     template_name = 'hab_new.html'
@@ -107,7 +107,7 @@ class HabCreateView(LoginRequiredMixin, CreateView):
 
 class HabUpdateView(UserIsNoBlockMixin, UpdateView):
     """
-    класс - ArticleUpdate
+    класс - HabUpdate
     """
     model = Hab
     template_name = 'hab_edit.html'
@@ -116,10 +116,10 @@ class HabUpdateView(UserIsNoBlockMixin, UpdateView):
 
 class HabDeleteView(UserIsNoBlockMixin, DeleteView):
     """
-    класс - ArticleDelete
+    класс - HabDelete
     """
     model = Hab
-    template_name = 'article_delete.html'
+    template_name = 'hab_delete.html'
     success_url = reverse_lazy(main)
 
 
@@ -157,7 +157,7 @@ def like_hab(request, pk):
         else:
             hab_obj.liked.add(user)
         like, created = Like.objects.get_or_create(user=user,
-                                                   article_id=hab_id)
+                                                   hab_id=hab_id)
         if not created:
             if like.value == 'Like':
                 like.value = 'Dislike'

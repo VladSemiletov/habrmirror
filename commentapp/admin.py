@@ -8,7 +8,7 @@ class CommentAdmin(admin.ModelAdmin):
     """
     list_display = (
         'comment_author',
-        'comment_article',
+        'comment_hab',
         'comment_text',
         'comment_create',
         'comment_update',

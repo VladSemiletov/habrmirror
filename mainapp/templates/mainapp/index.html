@@ -42,7 +42,7 @@
         <a class="header_title"></a>
       </div>
       <div class="header_center">
-        <a class="header_title line-after-heading" href="{% url 'index' %}">Habrmirror</a>
+        <a class="header_title line-after-heading" href="{% url 'hab:main' %}">Habrmirror</a>
       </div>
 
 
@@ -66,18 +66,19 @@
         </a>
 
         {% if user.is_authenticated %}
-          <a class="header_right_user" href="{% url 'authapp:account' %}" aria-label="User">
+          <a class="header_right_user" href="{% url 'auth:profile' user.pk %}" aria-label="User">
+<!--            Переделать сылку на страницу профайла-->
             <img src="{% static 'img/user_24.png' %}" alt="user">
           </a>
 
           <a class="btn btn-sm btn-outline-secondary"
-             href="{% url 'authapp:logout' %}"
+             href="{% url 'auth:logout' %}"
              style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">
             Выйти
           </a>
         {% else %}
           <a class="btn btn-sm btn-outline-secondary"
-             href="{% url 'authapp:login' %}"
+             href="{% url 'auth:login' %}"
              style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">
             Войти
           </a>
