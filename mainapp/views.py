@@ -1,25 +1,25 @@
+from urllib.request import Request
+
+from django.http import HttpResponse
 from django.shortcuts import render
+from core.context_service import context_update
+
+# Create your views here.
+from mainapp.service_mainapp import last_hub, all_HabCategory
 
 
-def main(request):
-    title = "Main"
-
-    content = {"title": title}
-
-    return render(request, "mainapp/index.html", content)
-
-
-def about(request):
-    title = "About"
-
-    content = {"title": title}
-
-    return render(request, "mainapp/about.html", content)
+def index(request: Request) -> HttpResponse:
+    """Функция мениет контексn для главной страницы и рендерит ее"""
+    context = {}
+    context_update(context, key='Title', value='HabrMirror')
+    # context_update(context, key='hab', value=last_hub(5))
+    context_update(context, key='hab_category', value=all_HabCategory())
+    return render(request, 'mainapp/index.html', context)
 
 
-def help(request):
-    title = "help"
+def category(request: Request, pk: int) -> HttpResponse:
+    pass
 
-    content = {"title": title}
 
-    return render(request, "mainapp/help.html", content)
+def comment(request: Request, pk: int) -> HttpResponse:
+    pass

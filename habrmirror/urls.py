@@ -1,4 +1,5 @@
 """habrmirror URL Configuration
+
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.0/topics/http/urls/
 Examples:
@@ -13,23 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from django.conf.urls import include
+
+from django.urls import path, include
+from mainapp.views import index, category, comment
+
+
 from django.conf import settings
 from django.conf.urls.static import static
-from mainapp.views import about, help
 
 urlpatterns = [
+    path('', index, name='index'),
     path('admin/', admin.site.urls),
-    path('_admin/', include('adminapp.urls', namespace='_admin')),
-    path('temp/', include('mainapp.urls')),
+    path('category/<int:pk>', category, name='category'),
     path('auth/', include('authapp.urls', namespace='auth')),
-    path('', include('habapp.urls', namespace='hab')),
-    # path('', include('social_django.urls', namespace='social')),
-    # path('', include('searchapp.urls', namespace='search')),
-    path('notification/', include('notificationapp.urls', namespace='notify')),
-    # path('about/', about, name='about'),
-    # path('help/', help, name='help'),
+    path('comment/<int:pk>', comment, name='comment'),
 ]
 
 if settings.DEBUG:
