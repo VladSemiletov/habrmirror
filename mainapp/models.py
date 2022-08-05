@@ -1,7 +1,5 @@
-from datetime import datetime
-from datetime import date
-
 from django.db import models
+<<<<<<< HEAD
 from django.utils import timezone
 
 from authapp.models import HabUser
@@ -43,3 +41,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.author
+=======
+
+# Create your models here.
+>>>>>>> HAB-4
