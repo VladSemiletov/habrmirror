@@ -22,6 +22,11 @@ from mainapp.views import index, category, comment
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+import mainapp
+from mainapp.views import about, help
+
+
 urlpatterns = [
     path('', index, name='index'),
     path('admin/', admin.site.urls),

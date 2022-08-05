@@ -23,3 +23,8 @@ class UserProfile(models.Model):
 
 
 
+    def delete(self, using=None, keep_parents=False):
+        """ Переопределение метода delete"""
+        self.is_active = False
+        self.user.is_active = False
+
