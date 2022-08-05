@@ -3,3 +3,7 @@
 venv/
 .idea/
 db.sqlite3
+pycache/
+/migrations/
+!/migrations
+!/migrations/init.py
