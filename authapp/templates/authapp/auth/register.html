@@ -1,19 +1,21 @@
 {% extends 'authapp/auth/base.html' %}
 {% load static %}
 
-
-{% block head %}
-    <div class="h2 text-center head">
-        Регистрация
-    </div>
-{% endblock %}
-
 {% block content %}
-    <form action="{% url 'auth:register' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ register_form.as_p }}
-        <input type="submit" class="btn btn-primary" value="Зарегистрироваться">
-    </form>
-    <hr>
-    <a href="{% url 'auth:login' %}">Войти</a>
+
+    <br><br><br>
+
+                    <form role="form" method="post" action="{% url 'auth:register' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <fieldset>
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <br>
+                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Зарегистрироваться">
+                        </fieldset>
+                    </form>
+                    <hr/>
+
+    <br><br><br>
+
 {% endblock %}

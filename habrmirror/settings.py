@@ -43,9 +43,18 @@ INSTALLED_APPS = [
 
     # 'userapp',
     'authapp',
+    'notificationapp',
+    'commentapp',
+    'ratingapp',
+    'habapp',
+    'adminapp',
 ]
 
 AUTH_USER_MODEL = 'authapp.HabUser'
+
+
+AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
+# - social_core.backends.google.GoogleOAuth2
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'commentapp.middleware.RequestMiddlewareUser'
 ]
 
 ROOT_URLCONF = 'habrmirror.urls'
@@ -108,6 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 8,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -149,3 +162,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+"""
+Локальная отправка почты
+"""
+DOMAIN_NAME = 'http://localhost:8000'
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = '2525'
+EMAIL_HOST_USER = 'django@geekshop.local'
+EMAIL_HOST_PASSWORD = 'geekshop'
+EMAIL_USE_SSL = False
+
+# EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None //Отправка через тестовый сервере
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = 'tmp/email-messages/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
