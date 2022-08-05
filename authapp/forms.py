@@ -1,8 +1,6 @@
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django import forms
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from django.forms import fields
-from .models import HabUser, HabProfile
-from django.contrib.auth import forms as auth_forms
+
 
 
 from authapp.models import HabUser
@@ -29,24 +27,27 @@ def add_class_html(fields):
 
 
 class UserLoginForm(AuthenticationForm):
+
     class Meta:
         model = HabUser
         fields = ('username', 'password')
 
     def __init__(self, *args, **kwargs):
-        super(UserLoginForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
+        print(self.fields.items())
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
+            # field.widget.attrs['placeholder'] = field_name
+            field.help_text = ''
 
 
-class UserRegisterForm(UserCreationForm):
+class HabUserRegisterForm(UserCreationForm):
     class Meta:
         model = HabUser
-        fields = ('username', 'email', 'first_name', 'last_name', 'password1',
-                  'password2')
+        fields = ('username', 'first_name', 'last_name', 'email', 'age', 'avatar', 'password1', 'password2')
 
     def __init__(self, *args, **kwargs):
-        super(UserRegisterForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
             field.help_text = ''
@@ -55,26 +56,30 @@ class UserRegisterForm(UserCreationForm):
     # def save(self, *args, **kwargs):
         user = super().save()
 
-        user.is_active = False
-        salt = hashlib.sha1(
-            str(random.random()).encode('utf8')).hexdigest()[:6]
 
-        user.activation_key = hashlib.sha1(
-            (user.email + salt).encode('utf8')).hexdigest()
-        user.save()
+    def clean_username(self):
+        data = self.cleaned_data['username']
+        if len(data) > 24:
+            raise forms.ValidationError('Слишком длинный ник.')
+        return data
 
-        return user
+    def clean_first_name(self):
+        data = self.cleaned_data['first_name']
+        if len(data) > 24:
+            raise forms.ValidationError('Слишком длинное имя.')
+        return data
 
 
-class UserEditForm(forms.ModelForm):
-    """ Форма редактирование пользователя """
+class HabUserAccountForm(UserChangeForm):
     class Meta:
         model = HabUser
-        fields = ('username', 'first_name', 'last_name', 'email', 'avatar')
+        fields = ('username', 'first_name', 'email', 'age', 'avatar', 'password')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         add_class_html(self.fields)
+
 
     def clean_age(self):
         data = self.cleaned_data['age']
@@ -93,6 +98,7 @@ class UserEditForm(forms.ModelForm):
         if len(data) > 24:
             raise forms.ValidationError('Слишком длинное имя.')
         return data
+
 
     def clean_avatar(self):
         data = self.cleaned_data['avatar']
@@ -141,3 +147,4 @@ class HabForm(forms.ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = 'form-control'
             field.help_text = ''
+
