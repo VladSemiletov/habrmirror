@@ -1,0 +1,14 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: 
+ =?utf-8?b?0L/QvtC00YLQstC10YDQttC00LXQvdC40LUg0YPRh9GR0YLQvdC+0Lkg0LfQsNC/?=
+ =?utf-8?b?0LjRgdC4IGRqYW5nbzI=?=
+From: django@geekshop.local
+To: django2@bk.ru
+Date: Fri, 05 Aug 2022 10:47:12 -0000
+Message-ID: <165969643281.7080.15057778922187529860@vb>
+
+Для подтверждения учетной записи django2 на портале             http://localhost:8000 перейдите по ссылке: 
+http://localhost:8000/auth/verify/django2@bk.ru/69753183349acabbd7e570dbc3ac2a4ba17d00ae
+-------------------------------------------------------------------------------

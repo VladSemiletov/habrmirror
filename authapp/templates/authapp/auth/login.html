@@ -2,38 +2,25 @@
 {% load static %}
 
 {% block content %}
-<!--    <form action="{% url 'auth:login' %}" method="post" enctype="multipart/form-data">-->
-<!--        {% csrf_token %}-->
-<!--        <div class="form-floating">-->
-<!--            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">-->
-<!--            <label for="floatingInput">Email address</label>-->
-<!--        </div>-->
-<!--        <div class="form-floating">-->
-<!--            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">-->
-<!--            <label for="floatingPassword">Password</label>-->
-<!--        </div>-->
+    <br><br><br>
 
-<!--        <div class="checkbox">-->
-<!--            <label>-->
-<!--                <input type="checkbox" value="remember-me"> Remember me-->
-<!--            </label>-->
-<!--        </div>-->
-<!--        <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>-->
-<!--    </form>-->
+                    <form accept-charset="UTF-8" role="form" action="{% url 'auth:login' %}" method="post">
+                        {% csrf_token %}
+                        <fieldset>
+                            {% if next %}
+                                <input type="hidden" name="next" value="{{ next }}">
+                            {% endif %}
+                            {{ form.as_p }}
+                            <br>
+                            <input class="btn btn-primary" type="submit" value="Войти">
 
-<!--    <p class="mt-4 text-muted"><hr><a href="{% url 'auth:register' %}">Регистрация</a></p>-->
+                                <a href="{% url 'auth:register' %}"> Зарегистрироваться </a>
 
+<!---->
+                        </fieldset>
+                    </form>
+                    <hr/>
 
-    <form action="{% url 'auth:login' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ login_form.as_p }}
+    <br><br><br>
 
-        {% if next %}
-            <input type="hidden" name="next" value="{{ next }}">
-        {% endif %}
-
-        <input type="submit" class="btn btn-primary" value="Войти">
-    </form>
-    <hr>
-    <a href="{% url 'auth:register' %}">Регистрация</a>
 {% endblock %}

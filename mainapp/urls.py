@@ -1,8 +1,8 @@
-from django.urls import path
-from mainapp import views as mainapp
+from django.urls import path, include
 
-app_name = 'mainapp'
+from mainapp.views import main
 
 urlpatterns = [
-    path('', mainapp.index, name="index"),
+    path('', main, name='main'),
+    path('index/', main),
 ]

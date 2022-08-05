@@ -27,7 +27,7 @@
                         <span></span>
 
                         <ul id="menuAccount">
-                            <li><a href="#">Главная</a></li>
+                            <li><a href="{% url 'hab:main' %}">Главная</a></li>
                             <li><a href="#">Дизайн</a></li>
                             <li><a href="#">Веб разработка</a></li>
                             <li><a href="#">Мобильная разработка</a></li>
@@ -41,7 +41,7 @@
                 <a class="header_title"></a>
             </div>
             <div class="header_center">
-                <a class="header_title line-after-heading" href="{% url 'index' %}">Habrmirror</a>
+                <a class="header_title line-after-heading" href="{% url 'hab:main' %}">Habrmirror</a>
             </div>
 
 
@@ -65,18 +65,18 @@
                 </a>
 
                 {% if user.is_authenticated %}
-                    <a class="header_right_user" href="{% url 'authapp:account' %}" aria-label="User">
+                    <a class="header_right_user" href="{% url 'auth:profile' user.pk %}" aria-label="User">
                       <img src="{% static 'img/user_24.png' %}" alt="user">
                     </a>
 
                 <a class="btn btn-sm btn-outline-secondary"
-                     href="{% url 'authapp:logout' %}"
+                     href="{% url 'auth:logout' %}"
                      style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">
                     Выйти
                 </a>
                 {% else %}
                 <a class="btn btn-sm btn-outline-secondary"
-                     href="{% url 'authapp:login' %}"
+                     href="{% url 'auth:login' %}"
                      style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">
                     Войти
                 </a>
@@ -87,10 +87,26 @@
 
 
         <div class="container_account">
-                {% block contant_left %}
+                {% block content_left %}
+                <div class="container_account_main">
+                    <div class="account_left">
+                        <a class="account_left_p" href="{% url 'auth:profile' user.pk %}">
+                            <p>Учётная запись</p>
+                        </a>
+                        <a class="account_left_p" href="{% url 'authapp:habs' %}">
+                            <p>Хабы</p>
+                        </a>
+                        <a class="account_left_p" href="{% url 'authapp:messages' %}">
+                            <p>Уведомления</p>
+                        </a>
+                        <a class="account_left_p" href="#">
+                            <p>Админка</p>
+                        </a>
+                    </div>
+                </div>
                 {% endblock %}
 
-                {% block contant_right %}
+                {% block content_right %}
                 {% endblock %}
         </div>
     </body>
