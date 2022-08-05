@@ -27,7 +27,7 @@
                         <span></span>
 
                         <ul id="menuAccount">
-                            <li><a href="{% url 'hab:main' %}">Главная</a></li>
+                            <li><a href="#">Главная</a></li>
                             <li><a href="#">Дизайн</a></li>
                             <li><a href="#">Веб разработка</a></li>
                             <li><a href="#">Мобильная разработка</a></li>
@@ -87,26 +87,10 @@
 
 
         <div class="container_account">
-                {% block content_left %}
-                <div class="container_account_main">
-                    <div class="account_left">
-                        <a class="account_left_p" href="{% url 'auth:profile' user.pk %}">
-                            <p>Учётная запись</p>
-                        </a>
-                        <a class="account_left_p" href="{% url 'authapp:habs' %}">
-                            <p>Хабы</p>
-                        </a>
-                        <a class="account_left_p" href="{% url 'authapp:messages' %}">
-                            <p>Уведомления</p>
-                        </a>
-                        <a class="account_left_p" href="#">
-                            <p>Админка</p>
-                        </a>
-                    </div>
-                </div>
+                {% block contant_left %}
                 {% endblock %}
 
-                {% block content_right %}
+                {% block contant_right %}
                 {% endblock %}
         </div>
     </body>
