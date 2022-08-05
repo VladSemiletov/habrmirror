@@ -11,15 +11,13 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.utils.timezone import now
 
-<<<<<<< HEAD
-from authapp.forms import HabUserLoginForm, HabUserRegisterForm, HabUserAccountForm, HabForm
-=======
+
 from habapp.models import Hab
-from authapp.forms import UserLoginForm, UserRegisterForm, UserEditForm, ProfileEditForm, PasswordChangeForm
+from authapp.forms import UserLoginForm, UserRegisterForm, UserEditForm, ProfileEditForm, HabForm, PasswordChangeForm
 from authapp.models import HabUser
 from notificationapp.models import NotifyUser
 from ratingapp.models import AuthorRating
->>>>>>> HAB-4
+
 
 class SendVerifyMail:
     """ Отправка сообщения пользователю """
@@ -56,6 +54,7 @@ class VerifyView(TemplateView):
         except Exception as ex:
             return HttpResponseRedirect(reverse('main'))
 
+
 # @csrf_exempt
 class LoginUserView(LoginView):
     """ Контроллер входа в системы """
@@ -66,36 +65,8 @@ class LoginUserView(LoginView):
 class LogoutUserView(LogoutView):
     """ Контроллер выхода из системы """
 
-<<<<<<< HEAD
-    context = {
-        'account_form': account_form
-    }
-    return render(request, 'authapp/account/account.html', context)
-
-
-def habs(request):
-    if request.method == 'POST':
-        hab_form = HabForm(request.POST)
-        if hab_form.is_valid():
-            return HttpResponseRedirect(reverse('habs'))
-    else:
-        hab_form = HabForm()
-
-    context = {
-        'hab_form': hab_form
-    }
-    return render(request, 'authapp/account/habs.html', context)
-
-
-def messages(request):
-    if request.method == 'POST':
-        return HttpResponseRedirect(reverse('messages'))
-
-    return render(request, 'authapp/account/messages.html')
-=======
     def get_success_url(self):
         return self.request.META.get('HTTP_REFERER')
-
 
 
 class RegisterUserView(SuccessMessageMixin, CreateView):
@@ -112,7 +83,8 @@ class RegisterUserView(SuccessMessageMixin, CreateView):
         if request.method == "POST":
             if register_form.is_valid():
                 if HabUser.objects.all().filter(email=register_form.data['email']):
-                    context = {'error': f'пользователь уже зарегистрирован с данным EMAIL:{register_form.data["email"]}'}
+                    context = {
+                        'error': f'пользователь уже зарегистрирован с данным EMAIL:{register_form.data["email"]}'}
                     return render(request, 'authapp/auth/error.html', context)
                 user = register_form.save()
                 SendVerifyMail(user)
@@ -127,6 +99,26 @@ class RegisterUserView(SuccessMessageMixin, CreateView):
                 {}
             )
 
+
+def messages(request):
+    if request.method == 'POST':
+        return HttpResponseRedirect(reverse('messages'))
+
+    return render(request, 'authapp/account/messages.html')
+
+
+def habs_test(request):
+    if request.method == 'POST':
+        hab_form = HabForm(request.POST)
+        if hab_form.is_valid():
+            return HttpResponseRedirect(reverse('habs_test'))
+    else:
+        hab_form = HabForm()
+
+    context = {
+        'hab_form': hab_form
+    }
+    return render(request, 'authapp/account/habs.html', context)
 
 
 class UserIsUserMixin(UserPassesTestMixin):
@@ -166,6 +158,8 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
         else:
             return self.render_to_response(
                 self.get_context_data(form=form, form2=form2))
+
+
 class UserDetailView(DetailView):
     """ Страница профиля """
     model = HabUser
@@ -185,11 +179,12 @@ class UserDetailView(DetailView):
             context['rating'] = rating.value()
 
         except Exception:
-            #TODO обработать конкретное исключение
+            # TODO обработать конкретное исключение
             pass
         context['notify'] = NotifyUser.objects.all().filter(user_to=self.object)
 
         return context
+
 
 class UserChangePassword(LoginRequiredMixin, PasswordChangeView):
     """ Сменя пароля """
@@ -198,4 +193,3 @@ class UserChangePassword(LoginRequiredMixin, PasswordChangeView):
 
     def get_success_url(self):
         return reverse('auth:profile', kwargs={'pk': self.request.user.pk})
->>>>>>> HAB-4

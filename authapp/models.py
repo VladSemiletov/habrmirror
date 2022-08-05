@@ -77,11 +77,6 @@ class HabProfile(models.Model):
     zone = models.IntegerField(verbose_name='часовая зона', default=0)
     is_active = models.BooleanField(verbose_name='Статус активности', default=True)
 
-<<<<<<< HEAD
-    user = models.OneToOneField(HabUser, unique=True, null=False, db_index=True, on_delete=models.CASCADE)
-    about_me = models.TextField(verbose_name='О себе', max_length=512, blank=True)
-    gender = models.CharField(choices=GENDER_CHOICES, blank=True, max_length=1, verbose_name='пол')
-=======
     def __str__(self):
         return f'{self.user.username}{" - " if self.user.first_name or self.user.last_name else ""} {self.user.first_name} {self.user.last_name}'
 
@@ -90,9 +85,7 @@ class HabProfile(models.Model):
         if created:
             HabProfile.objects.create(user=instance)
 
-
     def delete(self, using=None, keep_parents=False):
         """ Переопределение метода delete"""
         self.is_active = False
         self.user.is_active = False
->>>>>>> HAB-4

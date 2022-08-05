@@ -4,17 +4,18 @@ from django.forms import fields
 from .models import HabUser, HabProfile
 from django.contrib.auth import forms as auth_forms
 
-<<<<<<< HEAD
+
 from authapp.models import HabUser
-from mainapp.models import Hab
-=======
+from habapp.models import Hab
+
 from django.contrib.auth.forms import UserChangeForm
->>>>>>> HAB-4
+
 
 import random
 import hashlib
 
 CHECK_LIST = ['is_active', 'is_delete', 'is_staff', 'is_deleted']
+
 
 def add_class_html(fields):
     for field_name, field in fields.items():
@@ -51,6 +52,7 @@ class UserRegisterForm(UserCreationForm):
             field.help_text = ''
 
     def save(self):
+    # def save(self, *args, **kwargs):
         user = super().save()
 
         user.is_active = False
@@ -72,12 +74,7 @@ class UserEditForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-<<<<<<< HEAD
-        for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
-            field.help_text = ''
-            if field_name == 'password':
-                field.widget = forms.HiddenInput()
+        add_class_html(self.fields)
 
     def clean_age(self):
         data = self.cleaned_data['age']
@@ -102,24 +99,8 @@ class UserEditForm(forms.ModelForm):
         print(bool(data))
         if data:
             return data
-
         data = "{% static 'img/user_photo.png' %}"
         return data
-
-
-class HabForm(forms.ModelForm):
-
-    class Meta:
-        model = Hab
-        exclude = ('author', 'description', 'category',)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        for field_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
-            field.help_text = ''
-=======
-        add_class_html(self.fields)
 
 
 class ProfileEditForm(forms.ModelForm):
@@ -147,4 +128,16 @@ class PasswordChangeForm(auth_forms.PasswordChangeForm):
     def __init__(self, *args, **kwargs):
         super(PasswordChangeForm, self).__init__(*args, **kwargs)
         add_class_html(self.fields)
->>>>>>> HAB-4
+
+
+class HabForm(forms.ModelForm):
+
+    class Meta:
+        model = Hab
+        exclude = ('author', 'description', 'category',)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = 'form-control'
+            field.help_text = ''
