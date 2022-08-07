@@ -59,7 +59,7 @@
             </a>
             {% else %}
             <a class="btn btn-sm btn-outline-secondary"
-                 href="{% url 'authapp:login' %}"
+                 href="{% url 'authapp:login' %}?next={{request.path}}"
                  style="--bs-btn-color: white; --bs-btn-font-size: 1rem;">
                 Войти
             </a>
