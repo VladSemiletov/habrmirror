@@ -162,7 +162,7 @@ def habs_test(request):
 #         return render(request, '/', context)
 
 def hab_set(request):
-    habs = Hab.objects.all().select_related('user')
+    habs = Hab.objects.all().select_related('author')
     context = {}
     context_update(context, key='habs', value=habs)
     return render(request, 'authapp/auth/habs.html', context)

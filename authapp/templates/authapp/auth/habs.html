@@ -1,0 +1,40 @@
+{% extends 'authapp/account/base.html' %}
+{% block content %}
+<div class="row">
+    {% if habs %}
+        {%  for hab in habs %}
+                {% csrf_token %}
+
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card h-100">
+                    <a href="#">
+                        <img class="card-img-top"
+                             src="{{ author.avatar.url }}"
+                             alt="">
+                    </a>
+                    <div class="card-body">
+                        <h4 class="card-title">
+                            <a href="{% url 'habapp:detail' hab.id %}">{{ hab.title }}</a>
+                        </h4>
+                        <h5>{{ hab.author }} руб.</h5>
+                        <p class="card-text">{{ hab.content }}</p>
+                        <p class="card-text">{{ hab.category}}</p>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-lg-4 col-md-6 mb-4">
+            <a href="{% url 'hab:new' %}">Здесь пока пусто, создайте свой хаб</a>
+        </div>
+    {% endif %}
+
+        <div class="card-footer text-center">
+            <button type="button" class="btn btn-outline-success" method='post' href="{% url 'habapp:new' %}">
+                Отправить в корзину
+            </button>
+        </div>
+
+</div>
+{% endblock %}
