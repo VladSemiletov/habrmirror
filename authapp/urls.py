@@ -12,7 +12,7 @@ urlpatterns = [
     path('logout/', LogoutUserView.as_view(), name='logout'),
     path('register/', RegisterUserView.as_view(), name='register'),
     # path('account/', authapp.account, name='account'),
-    path('habs/', authapp.habs_test, name='habs'),
+    path('habs/', authapp.hab_set, name='habs'),
     path('messages/', authapp.messages, name='messages'),
 
 

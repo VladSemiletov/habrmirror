@@ -1,3 +1,4 @@
+
 from django.core.mail import send_mail
 from django.conf import settings
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
@@ -11,7 +12,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.utils.timezone import now
 
-
+from core.context_service import context_update
 from habapp.models import Hab
 from authapp.forms import UserLoginForm, UserRegisterForm, UserEditForm, ProfileEditForm, HabForm, PasswordChangeForm
 from authapp.models import HabUser
@@ -119,6 +120,75 @@ def habs_test(request):
         'hab_form': hab_form
     }
     return render(request, 'authapp/account/habs.html', context)
+
+
+# def create_hab(request) -> HttpResponse:
+#     hab_form = HabForm
+#     context = {}
+#     context_update(context, key='Title', value='create_hab')
+#     context_update(context, key='user', value=HabUser)
+#     context_update(context, key='hab_form', value=hab_form)
+#
+#     return render(request, 'mainapp/hab_form.html', context)
+
+
+# def save_form(request):
+#     if request.method == 'POST':
+#         hab_form = HabForm(request.POST, request.FILES)
+#         if hab_form.is_valid():
+#             hab_form.save()
+#             return HttpResponseRedirect('/')
+#         else:
+#             return HttpResponseRedirect('show_hab')
+#
+#
+# def update_hab(request, pk: int):
+#     hab_form = HabForm
+#     hab = Hab.objects.get(pk=pk)
+#     context = {}
+#     context_update(context, key='Title', value='create_hab')
+#     context_update(context, key='user', value=HabUser)
+#     context_update(context, key='hab_form', value=hab_form)
+#     context_update(context, key='habs', value=hab)
+#
+#     if request.method == 'POST':
+#         hab_form = HabForm(request.POST, request.FILES, instance=hab)
+#         if hab_form.is_valid():
+#             hab_form.save()
+#             return HttpResponseRedirect(reverse('index'))
+#     else:
+#         hab_form = HabForm(instance=hab)
+#         context_update(context, key='hab_form', value=hab_form)
+#         return render(request, '/', context)
+
+def hab_set(request):
+    habs = Hab.objects.all().select_related('user')
+    context = {}
+    context_update(context, key='habs', value=habs)
+    return render(request, 'authapp/auth/habs.html', context)
+
+def read_hab(request, pk: int):
+    hab_form = HabForm
+    hab = Hab.objects.get(pk=pk)
+    context = {}
+    context_update(context, key='Title', value='create_hab')
+    context_update(context, key='user', value=HabUser)
+    context_update(context, key='hab_form', value=hab_form)
+    context_update(context, key='hab', value=hab)
+    hab_form = HabForm(instance=hab)
+    context_update(context, key='hab_form', value=hab_form)
+    return render(request, 'authapp/account/habs.html', context)
+
+#
+# def delete_hab(request, pk: int):
+#     hab = Hab.objects.get(pk=pk)
+#     hab_form = HabForm(instance=hab)
+#     if request.method == 'POST':
+#         hab_form.field.is_active = False
+#         hab_form.save()
+#         return HttpResponseRedirect(reverse('index'))
+#
+
 
 
 class UserIsUserMixin(UserPassesTestMixin):
