@@ -87,7 +87,7 @@ class RegisterUserView(SuccessMessageMixin, CreateView):
                         'error': f'пользователь уже зарегистрирован с данным EMAIL:{register_form.data["email"]}'}
                     return render(request, 'authapp/auth/error.html', context)
                 user = register_form.save()
-                SendVerifyMail(user)
+                # SendVerifyMail(user)
                 return HttpResponseRedirect(reverse('auth:login'))
             else:
                 context = {'error': f'Форма заполнена не корректна'}
