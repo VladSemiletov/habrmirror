@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'ratingapp',
     'habapp',
     'adminapp',
+    'ckeditor',
 ]
 
 AUTH_USER_MODEL = 'authapp.HabUser'

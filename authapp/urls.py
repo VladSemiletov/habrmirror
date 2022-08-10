@@ -13,7 +13,9 @@ urlpatterns = [
     path('register/', RegisterUserView.as_view(), name='register'),
     # path('account/', authapp.account, name='account'),
     path('habs/', authapp.hab_set, name='habs'),
+    path('save_form/', authapp.save_form, name='save_form'),
     path('messages/', authapp.messages, name='messages'),
+    path('create_hab/', authapp.create_hab, name='create_hab'),
 
 
     path('edit/<int:pk>/', ProfileEditView.as_view(), name='edit'),

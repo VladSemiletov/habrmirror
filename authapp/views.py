@@ -1,3 +1,4 @@
+import uuid
 
 from django.core.mail import send_mail
 from django.conf import settings
@@ -108,64 +109,57 @@ def messages(request):
     return render(request, 'authapp/account/messages.html')
 
 
-def habs_test(request):
-    if request.method == 'POST':
-        hab_form = HabForm(request.POST)
-        if hab_form.is_valid():
-            return HttpResponseRedirect(reverse('habs_test'))
-    else:
-        hab_form = HabForm()
-
-    context = {
-        'hab_form': hab_form
-    }
-    return render(request, 'authapp/account/habs.html', context)
-
-
-# def create_hab(request) -> HttpResponse:
-#     hab_form = HabForm
-#     context = {}
-#     context_update(context, key='Title', value='create_hab')
-#     context_update(context, key='user', value=HabUser)
-#     context_update(context, key='hab_form', value=hab_form)
-#
-#     return render(request, 'mainapp/hab_form.html', context)
-
-
-# def save_form(request):
+# def habs_test(request):
+#     hab_form = HabForm()
 #     if request.method == 'POST':
-#         hab_form = HabForm(request.POST, request.FILES)
+#         hab_form = HabForm(request.POST)
 #         if hab_form.is_valid():
 #             hab_form.save()
-#             return HttpResponseRedirect('/')
-#         else:
-#             return HttpResponseRedirect('show_hab')
-#
-#
-# def update_hab(request, pk: int):
-#     hab_form = HabForm
-#     hab = Hab.objects.get(pk=pk)
-#     context = {}
-#     context_update(context, key='Title', value='create_hab')
-#     context_update(context, key='user', value=HabUser)
-#     context_update(context, key='hab_form', value=hab_form)
-#     context_update(context, key='habs', value=hab)
-#
-#     if request.method == 'POST':
-#         hab_form = HabForm(request.POST, request.FILES, instance=hab)
-#         if hab_form.is_valid():
-#             hab_form.save()
-#             return HttpResponseRedirect(reverse('index'))
+#             return HttpResponseRedirect(reverse('habs_test'))
 #     else:
-#         hab_form = HabForm(instance=hab)
-#         context_update(context, key='hab_form', value=hab_form)
-#         return render(request, '/', context)
+#         context = {
+#             'hab_form': hab_form
+#         }
+#         return render(request, 'authapp/account/habs.html', context)
+
+
+def create_hab(request):
+    hab_form = HabForm()
+    context = {}
+    context_update(context, key='Title', value='create_hab')
+    context_update(context, key='author', value=int(request.user.id))
+    context_update(context, key='hab_form', value=hab_form)
+
+    return render(request, 'authapp/account/hab_c.html', context)
+
+
+def save_form(request):
+    if request.method == 'POST':
+        hab_form = HabForm(request.POST, request.FILES)
+        if hab_form.is_valid():
+            hab_form.save()
+            return HttpResponseRedirect('/')
+        else:
+            return HttpResponseRedirect(reverse('index'))
+
+#
+def update_hab(request, pk: uuid):
+    hab = Hab.objects.get(uid=pk)
+    hab_form = HabForm(instance=hab)
+    context = {}
+    context_update(context, key='Title', value='create_hab')
+    context_update(context, key='author', value=request.user)
+    context_update(context, key='hab_form', value=hab_form)
+    context_update(context, key='habs', value=hab)
+    context_update(context, key='update', value=now())
+    return render(request, 'authapp/account/hab_c.html', context)
 
 def hab_set(request):
-    habs = Hab.objects.all().select_related('author')
+    author = request.user.id
+    habs = Hab.objects.all().filter(author=author)
     context = {}
     context_update(context, key='habs', value=habs)
-    return render(request, 'authapp/auth/habs.html', context)
+    return render(request, 'authapp/account/habs.html', context)
 
 def read_hab(request, pk: int):
     hab_form = HabForm
