@@ -1,5 +1,8 @@
+from urllib.request import Request
+
 from django.core.mail import send_mail
 from django.conf import settings
+from django.http import HttpResponse
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.contrib import auth
 from django.urls import reverse
@@ -11,10 +14,11 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.utils.timezone import now
 
-
+from core.context_service import context_update
 from habapp.models import Hab
 from authapp.forms import UserLoginForm, UserRegisterForm, UserEditForm, ProfileEditForm, HabForm, PasswordChangeForm
 from authapp.models import HabUser
+from notificationapp.forms import UserNotificationForm
 from notificationapp.models import NotifyUser
 from ratingapp.models import AuthorRating
 
@@ -193,3 +197,14 @@ class UserChangePassword(LoginRequiredMixin, PasswordChangeView):
 
     def get_success_url(self):
         return reverse('auth:profile', kwargs={'pk': self.request.user.pk})
+
+
+def notification_view(request: Request, user_id: int) -> HttpResponse:
+    """Конроллер для страницы уведомлений пользователя"""
+    context ={}
+    notification_to_user = NotifyUser.objects.filter(user_to=user_id)
+    # notification_form = UserNotificationForm(data=notification_to_user)
+
+    context_update(context, 'notify', notification_to_user )
+
+    return render(request, 'authapp/account/notification.html', context)
