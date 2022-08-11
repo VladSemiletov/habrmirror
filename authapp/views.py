@@ -204,7 +204,7 @@ def notification_view(request: Request, user_id: int) -> HttpResponse:
     context ={}
     notification_to_user = NotifyUser.objects.filter(user_to=user_id)
     # notification_form = UserNotificationForm(data=notification_to_user)
-    # ntcnjdsq rjvtyn
+    # ntcnjdsq rjvtyn caegdfgdfgdfgadfg
     context_update(context, 'notify', notification_to_user )
 
     return render(request, 'authapp/account/notification.html', context)
