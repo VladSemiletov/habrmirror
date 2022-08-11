@@ -201,7 +201,7 @@ class UserChangePassword(LoginRequiredMixin, PasswordChangeView):
 def notification_view(request: Request, user_id: int) -> HttpResponse:
     """Конроллер для страницы уведомлений пользователя"""
     context ={}
-    notification_to_user = NotifyUser.objects.select_related(NotifyUser).filter(user_to=user_id)
+    notification_to_user = NotifyUser.objects.select_related('NotifyUser').filter(user_to=user_id)
     # notification_form = UserNotificationForm(data=notification_to_user)
     # ntcnjdsq rjvtyn caegdfgdfgdfgadfg
     context_update(context, 'notify', notification_to_user )
