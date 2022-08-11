@@ -16,6 +16,7 @@ urlpatterns = [
     path('save_form/', authapp.save_form, name='save_form'),
     path('messages/', authapp.messages, name='messages'),
     path('create_hab/', authapp.create_hab, name='create_hab'),
+    path('delete_hab/<uuid:pk>/', authapp.delete_hab, name='delete_hab'),
 
 
     path('edit/<int:pk>/', ProfileEditView.as_view(), name='edit'),

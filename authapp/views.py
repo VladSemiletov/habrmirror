@@ -174,13 +174,19 @@ def read_hab(request, pk: int):
     return render(request, 'authapp/account/habs.html', context)
 
 #
-# def delete_hab(request, pk: int):
-#     hab = Hab.objects.get(pk=pk)
-#     hab_form = HabForm(instance=hab)
-#     if request.method == 'POST':
-#         hab_form.field.is_active = False
-#         hab_form.save()
-#         return HttpResponseRedirect(reverse('index'))
+def delete_hab(request, pk: uuid):
+    hab = Hab.objects.get(uid=pk)
+    context = {}
+    context_update(context, key='Title', value='create_hab')
+    context_update(context, key='author', value=request.user)
+    context_update(context, key='habs', value=hab)
+    context_update(context, key='update', value=now())
+    if request.method == 'GET':
+        hab.status = 'DT'
+        hab.save()
+        return render(request, 'authapp/account/habs.html', context)
+    else:
+        return HttpResponseRedirect(reverse('index'))
 #
 
 
