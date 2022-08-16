@@ -44,7 +44,7 @@
                             <div class="col-sm-2 row">
                                 <div class="col-sm-12">
                                     <a class="btn btn-outline-secondary btn-block align-items-start d-b"
-                                       href="{% url 'article:detail' object.article_id %}" target="_blank">
+                                       href="{% url 'hab:detail' object.hab_id %}" target="_blank">
                                         К статье</a></div>
                                 <div class="col-sm-12">
                                     <form method="POST" action="{% url '_admin:notify_delete' object.pk %}">
@@ -74,13 +74,13 @@
             </div>
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                 <div class="card-body">
-                    {% for object in articles %}
+                    {% for object in habs %}
                     <div class="item-block shadow row">
                         <div class="col-sm-12 row">
                             <div class="col-sm-10"><span>{{ object.title }}</span></div>
                             <div class="col-sm-2">
                                 <a class="btn btn-outline-secondary btn-block align-items-start d-b"
-                                   href="{% url '_admin:approve_article' object.pk %}">Модерировать</a>
+                                   href="{% url '_admin:approve_hab' object.pk %}">Модерировать</a>
                             </div>
                             <div class="w-100 d-none d-md-block"></div>
                             <div class="col-sm-3"><span>Категория: <p>{{ object.category }}</p></span></div>

@@ -64,7 +64,7 @@
                                 {% csrf_token %}
                                 <input class="btn btn-outline-secondary btn-block align-items-end d-b w-100"
                                        type="submit"
-                                       value="{% if article.status != 'DT' %} Удалить {% else %} restore {% endif %}">
+                                       value="{% if hab.status != 'DT' %} Удалить {% else %} restore {% endif %}">
                             </form>
                         </div>
                     </div>

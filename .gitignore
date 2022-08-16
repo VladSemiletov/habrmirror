@@ -7,3 +7,4 @@ pycache/
 /migrations/
 !/migrations
 !/migrations/init.py
+/tmp/email-messages/

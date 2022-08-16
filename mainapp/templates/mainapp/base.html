@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html>
+    {% block head %}
+    <head>
+        <meta charset="utf-8">
+        <title>Habrmirror</title>
+        {% block css %}
+            <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+        {% endblock %}
+
+        {% block js %}
+        {% endblock %}
+    </head>
+    {% endblock %}
+
+    <body>
+        {% block header %}
+            {% include "./menu.html" %}
+        {% endblock %}
+
+
+        {% block main %}
+        {% endblock %}
+
+
+        {% block footer %}
+        <footer class="blog_footer">
+            <p>
+                <a href="#" class="blog_footer_back">Back to top</a>
+            </p>
+        </footer>
+        {% endblock %}
+
+    </body>
+</html>

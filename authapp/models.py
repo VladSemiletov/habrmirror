@@ -23,16 +23,16 @@ class HabUser(AbstractUser):
         blank=True,
         default='users_avatars/default.png'
     )
-    activation_key = models.CharField(max_length=128, blank=True, null=True)
-    activation_key_expires = models.DateTimeField(
-        default=(now() + timedelta(hours=48)))
+    # activation_key = models.CharField(max_length=128, blank=True, null=True)
+    # activation_key_expires = models.DateTimeField(
+    #     default=(now() + timedelta(hours=48)))
     role = models.CharField(verbose_name='роль', max_length=1, choices=ROLE_CHOICES, default=USER)
     is_block = models.DateTimeField(verbose_name='дата конца блокировки', default=now)
 
-    def is_activation_key_expired(self):
-        if now() < self.activation_key_expires:
-            return False
-        return True
+    # def is_activation_key_expired(self):
+    #     if now() < self.activation_key_expires:
+    #         return False
+    #     return True
 
     def __str__(self):
         return f'{self.first_name if self.first_name else ""} {self.last_name if self.last_name else ""}'

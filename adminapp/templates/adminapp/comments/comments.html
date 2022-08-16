@@ -36,7 +36,7 @@
                 <div class="col-sm-1">{{ forloop.counter }}</div>
                 <div class="col-sm-2"><a href="{% url 'auth:profile' comment.comment_author.pk %}">
                     {{ comment.comment_author }}</a></div>
-                <div class="col-sm-9"><a href="{% url 'article:detail' comment.comment_article.pk %}">
+                <div class="col-sm-9"><a href="{% url 'hab:detail' comment.comment_hab.pk %}">
                     {{ comment.comment_hab }}</a></div>
                 <div class="w-100 d-none d-md-block"></div>
                 <div class="col-sm-12 overflow-hidden" style="min-height: 60px">

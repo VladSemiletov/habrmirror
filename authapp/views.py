@@ -1,7 +1,9 @@
 import uuid
+from urllib.request import Request
 
 from django.core.mail import send_mail
 from django.conf import settings
+from django.http import HttpResponse
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.contrib import auth
 from django.urls import reverse
@@ -89,7 +91,7 @@ class RegisterUserView(SuccessMessageMixin, CreateView):
                         'error': f'пользователь уже зарегистрирован с данным EMAIL:{register_form.data["email"]}'}
                     return render(request, 'authapp/auth/error.html', context)
                 user = register_form.save()
-                SendVerifyMail(user)
+                # SendVerifyMail(user)
                 return HttpResponseRedirect(reverse('auth:login'))
             else:
                 context = {'error': f'Форма заполнена не корректна'}
@@ -263,3 +265,14 @@ class UserChangePassword(LoginRequiredMixin, PasswordChangeView):
 
     def get_success_url(self):
         return reverse('auth:profile', kwargs={'pk': self.request.user.pk})
+
+
+def notification_view(request: Request, user_id: int) -> HttpResponse:
+    """Конроллер для страницы уведомлений пользователя"""
+    context ={}
+    notification_to_user = NotifyUser.objects.select_related('NotifyUser').filter(user_to=user_id)
+    # notification_form = UserNotificationForm(data=notification_to_user)
+    # ntcnjdsq rjvtyn caegdfgdfgdfgadfg
+    context_update(context, 'notify', notification_to_user )
+
+    return render(request, 'authapp/account/notification.html', context)
