@@ -1,4 +1,6 @@
 from django.urls import path
+
+from authapp.views import update_hab
 from habapp.views import IndexView, HabDetailView, \
     HabCreateView, HabUpdateView, HabDeleteView, like_hab, \
     CategoryHabView, HabListView, HabPublished
@@ -12,7 +14,7 @@ urlpatterns = [
     path('hab/new/', HabCreateView.as_view(), name='add'),
     path('hab/list/', HabListView.as_view(), name='list'),
     path('hab/<uuid:pk>/', HabDetailView.as_view(), name='detail'),
-    path('hab/<uuid:pk>/edit/', HabUpdateView.as_view(), name='edit'),
+    path('hab/<uuid:pk>/edit/', update_hab, name='edit'),
     path('hab/<uuid:pk>/delete/', HabDeleteView.as_view(),
          name='delete'),
     path('hab/<uuid:pk>/like/', like_hab, name='like-art'),

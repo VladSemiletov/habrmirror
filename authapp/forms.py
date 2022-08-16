@@ -134,7 +134,7 @@ class HabForm(forms.ModelForm):
 
     class Meta:
         model = Hab
-        exclude = ('author', 'description', 'category',)
+        exclude = 'category', 'created', 'updated', 'status', 'liked', 'approve', 'publication_date'
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

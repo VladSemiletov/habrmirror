@@ -1,24 +1,5 @@
-<!DOCTYPE html>
 {% load static %}
-
-<html>
-    <head>
-
-        <meta charset="utf-8">
-        <title>Habrmirror</title>
-        {% block css %}
-            <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
-            <link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
-            <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-        {% endblock %}
-
-        {% block js %}
-        {% endblock %}
-    </head>
-
-    <body>
-
-            <header>
+<header>
 
     <div >
         <nav role="navigation" >
@@ -90,32 +71,3 @@
 
 
   </header>
-
-        <div class="container_account">
-                {% block content_left %}
-                <div class="container_account_main">
-                    <div class="account_left">
-                        <a class="account_left_p" href="{% url 'auth:profile' user.pk %}">
-                            <p>Учётная запись</p>
-                        </a>
-                        <a class="account_left_p" href="{% url 'authapp:habs' %}">
-                            <p>Хабы</p>
-                        </a>
-                        <a class="account_left_p" href="{% url 'authapp:messages' %}">
-                            <p>Уведомления</p>
-                        </a>
-                        <a class="account_left_p" href="#">
-                            <p>Админка</p>
-                        </a>
-                        <a class="account_left_p" href="{% url 'authapp:create_hab' %}">
-                            <p>создать хаб</p>
-                        </a>
-                    </div>
-                </div>
-                {% endblock %}
-
-                {% block content %}
-                {% endblock %}
-        </div>
-    </body>
-</html>

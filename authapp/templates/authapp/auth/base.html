@@ -18,24 +18,10 @@
 
     <body>
         <header>
-            <div>
-                <nav role="navigation">
-                    <div id="menuToggle">
-                        <input type="checkbox" />
-                        <span></span>
-                        <span></span>
-                        <span></span>
 
-                        <ul id="menu">
-                            <li><a href="{% url 'hab:main' %}">Главная</a></li>
-                            <li><a href="#">Дизайн</a></li>
-                            <li><a href="#">Веб разработка</a></li>
-                            <li><a href="#">Мобильная разработка</a></li>
-                            <li><a href="#">Маркетинг</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
+            {% include headmenu.html %}
+
+
 
             <div class="header_center">
                 <a class="header_title"></a>

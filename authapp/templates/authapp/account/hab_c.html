@@ -1,0 +1,17 @@
+{% extends 'authapp/account/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container_account_main">
+    <h2 class="container_account_main_h2">Хабы</h2>
+    <div class="account_right">
+        <form action="{% url 'auth:save_form' %}" method="post" enctype="multipart/form-data">
+            <h3>Создать хаб</h3><br>
+            {% csrf_token %}
+            {{ hab_form.as_p }}
+            <input type="submit" class="btn btn-primary" value="Создать">
+        </form>
+    </div>
+</div>
+{% endblock %}

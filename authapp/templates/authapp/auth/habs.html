@@ -43,7 +43,7 @@
                     {% if hab.status != 'DT'%}
                     <div class="col-sm-2 d-flex justify-content-center">
                         <a class="btn btn-secondary btn-block w-100" style="background-color: #e96b56; border-color: #e96b56;"
-                           href="{% url 'auth:delete_hab' hab.pk %}" method="POST">Удалить</a>
+                           href="{% url 'hab:delete' hab.pk %}">Удалить</a>
                     </div>
                     {% endif %}
                     {% if hab.status == 'DF' %}
@@ -55,7 +55,6 @@
                         </form>
                     </div>
                     {% endif %}
-
 
 
             </div>
