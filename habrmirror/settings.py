@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mainapp',
-
     'authapp',
     'notificationapp',
     'commentapp',
@@ -48,6 +47,7 @@ INSTALLED_APPS = [
     'habapp',
     'adminapp',
     'ckeditor',
+
 ]
 
 AUTH_USER_MODEL = 'authapp.HabUser'
@@ -64,7 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'commentapp.middleware.RequestMiddlewareUser'
+    'commentapp.middleware.RequestMiddlewareUser',
 ]
 
 ROOT_URLCONF = 'habrmirror.urls'
@@ -80,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'mainapp.context_processor.menu_category_context',
             ],
         },
     },

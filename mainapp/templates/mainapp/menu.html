@@ -11,10 +11,10 @@
 
                 <ul id="menu">
                     <li><a href="#">Главная</a></li>
-                    <li><a href="#">Дизайн</a></li>
-                    <li><a href="#">Веб разработка</a></li>
-                    <li><a href="#">Мобильная разработка</a></li>
-                    <li><a href="#">Маркетинг</a></li>
+                    {% for cat in categories %}
+                    <li><a href="{% url 'hab:hab_category' cat.id %}">{{cat.name}}</a></li>
+                    {% endfor %}
+                    <li><a href="#">Помощь</a></li>
                 </ul>
             </div>
         </nav>
