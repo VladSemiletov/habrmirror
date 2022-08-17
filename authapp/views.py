@@ -140,9 +140,9 @@ def save_form(request):
         hab_form = HabForm(request.POST, request.FILES)
         if hab_form.is_valid():
             hab_form.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect(reverse('auth:habs'))
         else:
-            return HttpResponseRedirect(reverse('index'))
+            return HttpResponseRedirect(reverse('main:index'))
 
 #
 def update_hab(request, pk: uuid):
