@@ -2,6 +2,30 @@
 {% load static %}
 
 
-{% block content_right %}
-    test
+{% block content %}
+
+<div class="table-responsive">
+<table class="table table-bordered" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Время получения</th>
+            <th>Тип</th>
+            <th>Прочитать</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in notify %}
+        <tr>
+            <td>{{ i.created }}</td>
+            <td>Получено уведомление типа "{{ i.get_type_notify_display }}" хаб "{{ i.hab.title }}" от пользователя "{{i.from_user}}"</td>
+            <td>
+                <div class="form-check">
+                    <input  class="form-check form-check-inline" type="checkbox" value="{{i.is_read}}">
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
 {% endblock %}

@@ -18,7 +18,7 @@ from django.utils.timezone import now
 from core.context_service import context_update
 from habapp.models import Hab
 from authapp.forms import UserLoginForm, UserRegisterForm, UserEditForm, ProfileEditForm, HabForm, PasswordChangeForm
-from authapp.models import HabUser
+from authapp.models import HabUser, HabProfile
 from notificationapp.models import NotifyUser
 from ratingapp.models import AuthorRating
 
@@ -140,9 +140,9 @@ def save_form(request):
         hab_form = HabForm(request.POST, request.FILES)
         if hab_form.is_valid():
             hab_form.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect(reverse('auth:habs'))
         else:
-            return HttpResponseRedirect(reverse('index'))
+            return HttpResponseRedirect(reverse('main:index'))
 
 #
 def update_hab(request, pk: uuid):
@@ -203,7 +203,7 @@ class UserIsUserMixin(UserPassesTestMixin):
 class ProfileEditView(LoginRequiredMixin, UpdateView):
     """ Редактирование профиля """
     model = HabUser
-    template_name = 'authapp/auth/edit.html'
+    template_name = 'authapp/account/account.html'
     form_class = UserEditForm
     second_form_class = ProfileEditForm
 
@@ -216,13 +216,13 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
         if 'form' not in context:
             context['form'] = self.form_class(instance=self.object)
         if 'form2' not in context:
-            context['form2'] = self.second_form_class(instance=self.object.habrprofile)
+            context['form2'] = self.second_form_class(instance=HabProfile.objects.get(id=self.kwargs['pk']))
         context['avatar'] = self.object.avatar
         return context
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form2 = self.second_form_class(request.POST, instance=self.object.habrprofile)
+        form2 = self.second_form_class(request.POST, instance=HabProfile.objects.get(id=self.kwargs['pk']))
         form = self.form_class(request.POST, instance=self.object)
         if form.is_valid() and form2.is_valid():
             form2.save()
@@ -270,9 +270,7 @@ class UserChangePassword(LoginRequiredMixin, PasswordChangeView):
 def notification_view(request: Request, user_id: int) -> HttpResponse:
     """Конроллер для страницы уведомлений пользователя"""
     context ={}
-    notification_to_user = NotifyUser.objects.select_related('NotifyUser').filter(user_to=user_id)
-    # notification_form = UserNotificationForm(data=notification_to_user)
-    # ntcnjdsq rjvtyn caegdfgdfgdfgadfg
+    notification_to_user = NotifyUser.objects.select_related('hab').filter(user_to=user_id)
     context_update(context, 'notify', notification_to_user )
 
     return render(request, 'authapp/account/notification.html', context)

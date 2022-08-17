@@ -2,14 +2,22 @@
 {% load static %}
 
 
-{% block contant_right %}
+{% block content%}
 <div class="container_account_main">
-    <h2 class="container_account_main_h2">Информация об учётной записи</h2>
+    <h2 class="container_account_main_h2">Информация о пользователе {{object.username}}</h2>
     <div class="account_right">
         <form  action="{% url 'auth:profile' user.pk %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ account_form.as_p }}
-            <input type="submit" class="btn btn-primary" value="Редактировать">
+            {% for field in form.visible_fields %}
+                {{ field.label }}
+                {{ field }}
+            {% endfor %}
+            {% for field in form2.visible_fields %}
+                {{ field.label }}
+                {{ field }}
+            {% endfor %}
+
+            <input type="submit" class="btn btn-primary" value="Сохранить изменения">
         </form>
     </div>
 </div>
