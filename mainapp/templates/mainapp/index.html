@@ -22,69 +22,13 @@
 
         <div class="main_center_block">
             <h2 class="main_center_block_title">Все потоки</h2>
-
-            <article class="main_center_block_hab">
-                <p class="main_center_block_hab_date_publ">Опубликовал: Mikhail 21.07.2022 в 18:19</p>
-                <h3 class="main_center_block_hab_text"><b>Заголовок</b></h3>
-                <p class="main_center_block_hab_date_publ">Тема: <a href="#">Веб разработка</a></p>
-
-                <div class="demo">
-                    <div class="main_center_block_hab_img_grid">
-                        <div class="wrapper">
-                            <img class="main_center_block_hab_img" src="{% static 'img/hab_1.jpg' %}">
-                        </div>
-                    </div>
-                </div>
-
-                <h4 class="main_center_block_hab_text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Accusamus, minus qui saepe suscipit vitae voluptates?
-                </h4>
-
-                <div class="main_center_block_hab_bottoms">
-                    <div class="main_center_block_hab_btm"><a class="main_center_block_hab_btm_a" href="">Лайк</a></div>
-                    <div class="main_center_block_hab_btm"><a class="main_center_block_hab_btm_a" href="#">Комментарии</a></div>
-                </div>
-            </article>
-
             <hr>
-
-            <article class="main_center_block_hab">
-                <p class="main_center_block_hab_date_publ">Опубликовал: Mikhail 21.07.2022 в 18:19</p>
-                <h3 class="main_center_block_hab_text"><b>Заголовок</b></h3>
-                <p class="main_center_block_hab_date_publ">Тема: <a href="#">Веб разработка</a></p>
-
-                <div class="demo">
-                    <div class="main_center_block_hab_img_grid">
-                        <div class="wrapper">
-                            <img class="main_center_block_hab_img" src="{% static 'img/hab_2.jpg' %}">
-                        </div>
-                    </div>
-                </div>
-
-                <h4 class="main_center_block_hab_text">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Accusamus, minus qui saepe suscipit vitae voluptates?
-                </h4>
-
-                <div class="main_center_block_hab_bottoms">
-                    <div class="main_center_block_hab_btm">
-                        <a class="main_center_block_hab_btm_a" href="">Лайк</a>
-                    </div>
-                    <div class="main_center_block_hab_btm">
-                        <a class="main_center_block_hab_btm_a" href="#">Комментарии</a>
-                    </div>
-                </div>
-            </article>
-
-            <hr>
-
             {% for i in hab %}
                 <article class="main_center_block_hab">
-                    <p class="main_center_block_hab_date_publ">Опубликовал: {{ i.author }} {{ i.creat_time }}</p>
+                    <p class="main_center_block_hab_date_publ">Опубликовал: {{ i.author }} {{ i.created }}</p>
                     <h3 class="main_center_block_hab_text"><b>{{ i.title }}</b></h3>
                     <p class="main_center_block_hab_date_publ">
-                        Тема: <a href="{% url 'category' i.category.id  %}">{{ i.category }}</a>
+                        Тема: <a href="#">{{ i.category }}</a>
                     </p>
 
                     <div class="demo">
@@ -96,7 +40,7 @@
                     </div>
 
                     <h4 class="main_center_block_hab_text">
-                        {{ i.body|slice:":150" }}...
+                        {{ i.content|slice:":150" }}...
                     </h4>
 
                     <div class="main_center_block_hab_bottoms">

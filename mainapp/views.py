@@ -1,11 +1,13 @@
 from django.shortcuts import render
 
+from core.context_service import context_update
+from mainapp.service_mainapp import last_hub
+
 
 def main(request):
-    title = "Main"
-
-    content = {"title": title}
-
+    content = {}
+    context_update(content, "title", "Main")
+    context_update(content, "hab", last_hub(10))
     return render(request, "mainapp/index.html", content)
 
 

@@ -5,6 +5,5 @@ from mainapp.views import main
 app_name = 'mainapp'
 
 urlpatterns = [
-    path('', main, name='main'),
-    path('index/', main, name='index'),
+    path('', main, name='index'),
 ]
