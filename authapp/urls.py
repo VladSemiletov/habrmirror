@@ -19,9 +19,9 @@ urlpatterns = [
     path('delete_hab/<uuid:pk>/', authapp.delete_hab, name='delete_hab'),
 
 
-    path('edit/<int:pk>/', ProfileEditView.as_view(), name='edit'),
+    # path('edit/<int:pk>/', ProfileEditView.as_view(), name='edit'),
     path('verify/<email>/<activation_key>', VerifyView.as_view(), name='verify'),
-    path('profile/<int:pk>', UserDetailView.as_view(), name='profile'),
+    path('profile/<int:pk>', ProfileEditView.as_view(), name='profile'),
     path('change-password/', UserChangePassword.as_view(), name='change_pass'),
     path('notification/<int:user_id>/', authapp.notification_view, name='user_notificftion'),
 ]
