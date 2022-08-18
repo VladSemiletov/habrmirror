@@ -33,7 +33,7 @@ class HabListView(ListView):
     """
     model = Hab
     paginate_by = 5
-    template_name = 'hab_list.html'
+    template_name = 'habs_list.html'
 
     def get_queryset(self):
         """
@@ -121,6 +121,7 @@ class HabDeleteView(UserIsNoBlockMixin, DeleteView):
     model = Hab
     template_name = 'hab_delete.html'
     success_url = reverse_lazy(main)
+
 
 
 class HabPublished(UserIsNoBlockMixin, DeleteView):

@@ -2,15 +2,15 @@ $( document ).ready(function() {
     $('.like-form').submit(function(e){
         e.preventDefault()
 
-        const article_id = $(this).attr('id')
+        const hab_id = $(this).attr('id')
 
-        const likeText = $(`.like-btn${article_id}`).text()
+        const likeText = $(`.like-btn${hab_id}`).text()
         const trim = $.trim(likeText)
 
         const url = $(this).attr('action')
 
         let result;
-        const likes = $(`.like-count${article_id}`).text()
+        const likes = $(`.like-count${hab_id}`).text()
         const trimCount = parseInt(likes)
 
         $.ajax({
@@ -18,17 +18,17 @@ $( document ).ready(function() {
             url: url,
             data: {
                 'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
-                'article_id': article_id,
+                'hab_id': hab_id,
             },
             success: function(response) {
                 if(trim === 'Не нравится') {
-                    $(`.like-btn${article_id}`).text('Нравится')
+                    $(`.like-btn${hab_id}`).text('Нравится')
                     result = trimCount - 1
                 } else {
-                    $(`.like-btn${article_id}`).text('Не нравится')
+                    $(`.like-btn${hab_id}`).text('Не нравится')
                     result = trimCount + 1
                 }
-                $(`.like-count${article_id}`).text(result)
+                $(`.like-count${hab_id}`).text(result)
             },
             error: function(response) {
                 console.log('error', response)
