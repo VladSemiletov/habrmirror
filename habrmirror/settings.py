@@ -181,3 +181,12 @@ EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'tmp/email-messages/'
 # LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+CKEDITOR_CONFIGS= {
+  'default':{
+
+    'toolbar': 'full',
+    'height': '300px',
+    'width': 'auto'
+},
+}

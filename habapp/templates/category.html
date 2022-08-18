@@ -1,4 +1,4 @@
-{% extends 'adminapp/base.html' %}
+{% extends 'authapp/account/base.html' %}
 {% load static %}
 
 {% block css %}
@@ -11,7 +11,7 @@
 <section id="breadcrumbs" class="breadcrumbs">
       <div class="container">
         <h4>
-            Статьи в категории: {{ category.name }} - {{ article_list|length }}
+            Статьи в категории: {{ category.name }} - {{ hab_list|length }}
             шт.
         </h4>
       </div>
@@ -19,21 +19,21 @@
 <div id="blog" class="blog">
 <div class="container" data-aos="fade-up">
     <div class="row">        
-        {% for article in article_list %}
+        {% for hab in hab_list %}
             <article class="entry">
 
                 <div class="entry-img">
-                    <img src="{{ article.image }}" alt="" class="img-fluid" width="100%">
+                    <img src="{{ hab.image }}" alt="" class="img-fluid" width="100%">
                 </div>
 
                 <h2 class="entry-title">
-                    <a href="{% url 'article:detail' article.pk %}">
-                        {{ article.title }}
+                    <a href="{% url 'hab:detail' hab.pk %}">
+                        {{ hab.title }}
                     </a>
                 </h2>
 
                 <h5>
-                    <span>Категория: {{ article.category }}</span>
+                    <span>Категория: {{ hab.category }}</span>
                 </h5>
 
                 <div class="entry-meta">
@@ -41,30 +41,30 @@
                         <li class="d-flex align-items-center"><i class="bi bi-person"></i>
                             <span>Автор:
 
-                                <a href="{% url 'auth:profile' article.author.pk %}"
+                                <a href="{% url 'auth:profile' hab.author.pk %}"
 				                           target="_blank"
                                    style="color: dodgerblue"
                                    class="">
 
-                                    {{ article.author }}
+                                    {{ hab.author }}
                                 </a>
                             </span>
                         </li>
 
                         <li class="d-flex align-items-center"><i class="bi bi-clock"></i>
-                            <a>{{ article.publication_date }}</a></li>
+                            <a>{{ hab.publication_date }}</a></li>
                         <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>
-                            <a>Комментариев: {{article.comments_articles.all.count }}</a>
+                            <a>Комментариев: {{hab.comments_habs.all.count }}</a>
                         </li>
                         <li class="d-flex align-items-center"><i class="bi bi-bar-chart"></i> <a
-                                 href="{% url 'article:detail' article.pk %}">Рейтинг: {{ article.rating }}</a>
+                                 href="{% url 'hab:detail' hab.pk %}">Рейтинг: {{ hab.rating }}</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="entry-content">
                     <div class="read-more">
-                        <a href="{% url 'article:detail' article.pk %}">Читать далее</a>
+                        <a href="{% url 'hab:detail' hab.pk %}">Читать далее</a>
                     </div>
                 </div>
               

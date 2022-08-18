@@ -110,7 +110,8 @@ def messages(request):
 
     return render(request, 'authapp/account/messages.html')
 
-
+'''
+В дальнейшем удалить повтор кода, так как давно создан в Habapp. вдобавок форма создания статьи не френдли даже к админу'''
 # def habs_test(request):
 #     hab_form = HabForm()
 #     if request.method == 'POST':
@@ -125,71 +126,71 @@ def messages(request):
 #         return render(request, 'authapp/account/habs.html', context)
 
 
-def create_hab(request):
-    hab_form = HabForm()
-    context = {}
-    context_update(context, key='Title', value='create_hab')
-    context_update(context, key='author', value=int(request.user.id))
-    context_update(context, key='hab_form', value=hab_form)
-
-    return render(request, 'authapp/account/hab_c.html', context)
-
-
-def save_form(request):
-    if request.method == 'POST':
-        hab_form = HabForm(request.POST, request.FILES)
-        if hab_form.is_valid():
-            hab_form.save()
-            return HttpResponseRedirect(reverse('auth:habs'))
-        else:
-            return HttpResponseRedirect(reverse('main:index'))
-
+# def create_hab(request):
+#     hab_form = HabForm()
+#     context = {}
+#     context_update(context, key='Title', value='create_hab')
+#     context_update(context, key='author', value=int(request.user.id))
+#     context_update(context, key='hab_form', value=hab_form)
 #
-def update_hab(request, pk: uuid):
-    hab = Hab.objects.get(uid=pk)
-    hab_form = HabForm(instance=hab)
-    context = {}
-    context_update(context, key='Title', value='create_hab')
-    context_update(context, key='author', value=request.user)
-    context_update(context, key='hab_form', value=hab_form)
-    context_update(context, key='habs', value=hab)
-    context_update(context, key='update', value=now())
-    return render(request, 'authapp/account/hab_c.html', context)
-
-def hab_set(request):
-    author = request.user.id
-    habs = Hab.objects.all().filter(author=author)
-    context = {}
-    context_update(context, key='habs', value=habs)
-    return render(request, 'authapp/account/habs.html', context)
-
-def read_hab(request, pk: int):
-    hab_form = HabForm
-    hab = Hab.objects.get(pk=pk)
-    context = {}
-    context_update(context, key='Title', value='create_hab')
-    context_update(context, key='user', value=HabUser)
-    context_update(context, key='hab_form', value=hab_form)
-    context_update(context, key='hab', value=hab)
-    hab_form = HabForm(instance=hab)
-    context_update(context, key='hab_form', value=hab_form)
-    return render(request, 'authapp/account/habs.html', context)
-
+#     return render(request, 'authapp/account/hab_c.html', context)
 #
-def delete_hab(request, pk: uuid):
-    hab = Hab.objects.get(uid=pk)
-    context = {}
-    context_update(context, key='Title', value='create_hab')
-    context_update(context, key='author', value=request.user)
-    context_update(context, key='habs', value=hab)
-    context_update(context, key='update', value=now())
-    if request.method == 'GET':
-        hab.status = 'DT'
-        hab.save()
-        return render(request, 'authapp/account/habs.html', context)
-    else:
-        return HttpResponseRedirect(reverse('index'))
 #
+# def save_form(request):
+#     if request.method == 'POST':
+#         hab_form = HabForm(request.POST, request.FILES)
+#         if hab_form.is_valid():
+#             hab_form.save()
+#             return HttpResponseRedirect(reverse('auth:habs'))
+#         else:
+#             return HttpResponseRedirect(reverse('main:index'))
+#
+# #
+# def update_hab(request, pk: uuid):
+#     hab = Hab.objects.get(uid=pk)
+#     hab_form = HabForm(instance=hab)
+#     context = {}
+#     context_update(context, key='Title', value='create_hab')
+#     context_update(context, key='author', value=request.user)
+#     context_update(context, key='hab_form', value=hab_form)
+#     context_update(context, key='habs', value=hab)
+#     context_update(context, key='update', value=now())
+#     return render(request, 'authapp/account/hab_c.html', context)
+#
+# def hab_set(request):
+#     author = request.user.id
+#     habs = Hab.objects.all().filter(author=author)
+#     context = {}
+#     context_update(context, key='habs', value=habs)
+#     return render(request, 'authapp/account/habs.html', context)
+#
+# def read_hab(request, pk: int):
+#     hab_form = HabForm
+#     hab = Hab.objects.get(pk=pk)
+#     context = {}
+#     context_update(context, key='Title', value='create_hab')
+#     context_update(context, key='user', value=HabUser)
+#     context_update(context, key='hab_form', value=hab_form)
+#     context_update(context, key='hab', value=hab)
+#     hab_form = HabForm(instance=hab)
+#     context_update(context, key='hab_form', value=hab_form)
+#     return render(request, 'authapp/account/habs.html', context)
+#
+# #
+# def delete_hab(request, pk: uuid):
+#     hab = Hab.objects.get(uid=pk)
+#     context = {}
+#     context_update(context, key='Title', value='create_hab')
+#     context_update(context, key='author', value=request.user)
+#     context_update(context, key='habs', value=hab)
+#     context_update(context, key='update', value=now())
+#     if request.method == 'GET':
+#         hab.status = 'DT'
+#         hab.save()
+#         return render(request, 'authapp/account/habs.html', context)
+#     else:
+#         return HttpResponseRedirect(reverse('index'))
+# #
 
 
 

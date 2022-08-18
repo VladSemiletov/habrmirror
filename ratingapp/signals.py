@@ -38,7 +38,7 @@ def post_save_comment_handler(sender, **kwargs):
 
         # Уменьшение счётчик для статьи
         try:
-            rating = HabRating.objects.get(article__uid=hab_uid)
+            rating = HabRating.objects.get(hab__uid=hab_uid)
         except ObjectDoesNotExist:
             pass
         else:

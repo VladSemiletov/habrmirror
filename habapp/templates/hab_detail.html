@@ -5,19 +5,18 @@
 
 <section id="blog" class="blog">
     <div class="container">
-        <div class="article-edit-form">
+        <div class="article-edit-form">   
 
             <div class="post-entry">
-                {% for hab in habs %}
                 <h2>{{ hab.title }}</h2>
-
                 <p>
                     <i class="bi bi-person"></i>
+                    <a href="{% url 'auth:profile' hab.author.pk %}" target="_blank">{{ hab.author }}</a>
                 </p>
                 <p>
                     <i class="bi bi-clock"></i>
-                    {% if habs %}
-                    <a>{{ hab.author }}</a>
+                    {% if hab.status == 'PB' and hab.approve %}
+                    <a>{{ hab.publication_date }}</a>
                     {% else %}
                         {% if not hab.updated == '' %}
                         <a>{{ hab.updated }}</a>
@@ -31,35 +30,32 @@
                     Рейтинг: {{ rating }}
                 </p>
                 <p>{{ hab.category }}</p>
-                <p>{{ hab.content | safe | slice:":150" }}...</p>
+                <p>{{ hab.content | safe }}</p>
                 {#<p>{{ hab.image }}</p>#}
             </div>
-            {% if request.user == hab.author and not request.user.check_block%}
+            {% if request.user == hab.author and not request.user.check_block %}
             <div class="row">
                 <div class="col-sm-2 d-flex justify-content-center">
                     <a class=" btn btn-secondary btn-block w-100" style="background-color: #e96b56; border-color: #e96b56;"
                        href="{% url 'hab:edit' hab.pk %}">Редактировать</a>
-                </div>{% endif %}
-                    {% if hab.status != 'DT'%}
-                    <div class="col-sm-2 d-flex justify-content-center">
-                        <a class="btn btn-secondary btn-block w-100" style="background-color: #e96b56; border-color: #e96b56;"
-                           href="{% url 'auth:delete_hab' hab.pk %}" method="POST">Удалить</a>
-                    </div>
-                    {% endif %}
-                    {% if hab.status == 'DF' %}
-                    <div class="col-sm-2 d-flex align-items-center ">
-                        <form method="POST" class="w-100 mar-b-5" action="{% url 'hab:public' hab.pk %}">
-                            {% csrf_token %}
-                            <input class="btn btn-secondary btn-block w-100 d-flex justify-content-center" type="submit"
-                                style="background-color: #e96b56; border-color: #e96b56;" value="Опубликовать">
-                        </form>
-                    </div>
-                    {% endif %}
-
-
-
+                </div>
+                {% if hab.status != 'DT'%}
+                <div class="col-sm-2 d-flex justify-content-center">
+                    <a class="btn btn-secondary btn-block w-100" style="background-color: #e96b56; border-color: #e96b56;"
+                       href="{% url 'hab:delete' hab.pk %}">Удалить</a>
+                </div>
+                {% endif %}
+                {% if hab.status == 'DF' %}
+                <div class="col-sm-2 d-flex align-items-center ">
+                    <form method="POST" class="w-100 mar-b-5" action="{% url 'hab:public' hab.pk %}">
+                        {% csrf_token %}
+                        <input class="btn btn-secondary btn-block w-100 d-flex justify-content-center" type="submit"
+                            style="background-color: #e96b56; border-color: #e96b56;" value="Опубликовать">
+                    </form>
+                </div>
+                {% endif %}
             </div>
-
+            {% endif %}
             <hr/>
             {% if request.user.is_authenticated and request.user.role != 'U' %}
             <div class="row">
@@ -84,7 +80,7 @@
             <div class="d-flex row div_like" style="margin-top: 10px; margin-bottom: 10px;">
                 {% if not request.user.check_block and request.user.is_authenticated %}
                 <div class="col-sm-12">
-                    <form action="#" method="POST" class="like-form"
+                    <form action="{% url 'hab:like-hab' hab.pk %}" method="POST" class="like-form"
                             id="{{hab.pk}}">
                         {% csrf_token %}
                         <input type="hidden" name="hab_id" value="{{hab.pk}}">
@@ -102,13 +98,13 @@
                 </div>
             </div>
             <hr>
-            {% include "commentapp/empty.py" %}
+            {% include "include_comments.html" %}
         </div>
-        {% endfor %}
     </div>
 </section>
-{% endblock %}
+{% endblock content %}
 
 {%block js%}
+<script src="{% static 'assets/js/main.js' %}"></script>
 <script src="{% static 'assets/js/like.js' %}"></script>
 {%endblock%}
