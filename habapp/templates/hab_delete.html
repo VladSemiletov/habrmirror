@@ -3,7 +3,7 @@
 
 {% block content %}
     <h1>Удалить статью</h1>
-    <form method="POST" action="{% url 'hab:delete' hab.pk %}">{% csrf_token %}
+    <form action="" method="post">{% csrf_token %}
         <p>Вы уверены, что хотите удалить статью "{{ hab.title }}"?</p>
         {{ form.as_p }}
         <input class="btn btn-outline-secondary btn-block align-items-end d-b w-100"
