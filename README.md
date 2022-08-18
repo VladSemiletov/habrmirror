@@ -43,8 +43,12 @@ sqlite3 habrmirror.db
 ~$ python3 manage.py migrate --run-syncdb 
 
 ~$ python3 manage.py runserver
-```
 
+
+~$ python manage.py loaddata fixtures/fixtures.json
+```
+В фикстурах добавляется 4 категории и 12 статей.
+```
 
 
 
