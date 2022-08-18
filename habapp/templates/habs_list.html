@@ -9,11 +9,11 @@
         <div class="container">
 
             {% for hab in object_list %}
-                <article class="entry">
-                    <h2 class="entry-title">
+                <article class="main_center_block_hab">
+                    <h2 class="main_center_block_hab_text">
                         <a href="{% url 'hab:detail' hab.pk %}">{{ hab.title }}</a>
                     </h2>
-                    <div class="entry-meta">
+                    <div class="main_center_block_hab_bottoms">
                         <ul>
                             <li class="d-flex align-items-center"><i class="bi bi-person"></i> <a
                                     href="{% url 'auth:profile' hab.author.pk %}">{{ hab.author }}</a></li>
