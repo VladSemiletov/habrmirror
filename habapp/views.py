@@ -120,7 +120,6 @@ class HabDeleteView(UserIsNoBlockMixin, DeleteView):
     """
     model = Hab
     template_name = 'hab_delete.html'
-    # success_url = reverse_lazy(main)
     success_url = reverse_lazy('hab:list')
 
 
