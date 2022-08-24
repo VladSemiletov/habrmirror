@@ -1,6 +1,19 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
 
+{% block css %}
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'css/blog.css' %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+{% endblock css %}
+   <script
+          src="https://code.jquery.com/jquery-3.6.0.js"
+          integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+          crossorigin="anonymous"></script>
+        </script>
 
 {% block main %}
 <main class="container">
@@ -17,40 +30,66 @@
             </p>
         </div>
     </div>
-
+<div id="blog" class="blog">
+<div class="container" data-aos="fade-up">
+    <div class="row">
     <div class="row">
 
         <div class="main_center_block">
             <h2 class="main_center_block_title">Все потоки</h2>
             <hr>
-            {% for i in hab %}
-                <article class="main_center_block_hab">
-                    <p class="main_center_block_hab_date_publ">Опубликовал: {{ i.author }} {{ i.created }}</p>
-                    <h3 class="main_center_block_hab_text"><b>{{ i.title }}</b></h3>
-                    <p class="main_center_block_hab_date_publ">
-                        Тема: <a href="#">{{ i.category }}</a>
-                    </p>
+            {% for hab in hab %}
+            <article class="entry">
 
-                    <div class="demo">
-                        <div class="main_center_block_hab_img_grid">
-                            <div class="wrapper">
-                                <img class="main_center_block_hab_img" src="{{ i.photo }}">
-                            </div>
-                        </div>
+                <div class="entry-img">
+                    <img src="{{ hab.image }}" alt="" class="img-fluid" width="100%">
+                </div>
+
+                <h2 class="entry-title">
+                    <a href="{% url 'hab:detail' hab.pk %}">
+                        {{ hab.title }}
+                    </a>
+                </h2>
+
+                <h5>
+                    <span>Категория: {{ hab.category }}</span>
+                </h5>
+                <h4>
+                    <span>{{ hab.content|slice:":150" | safe }}</span>
+                </h4>
+
+                <div class="entry-meta">
+                    <ul>
+                        <li class="d-flex align-items-center"><i class="bi bi-person"></i>
+                            <span>Автор:
+
+                                <a href="{% url 'auth:profile' hab.author.pk %}"
+				                           target="_blank"
+                                   style="color: dodgerblue"
+                                   class="">
+
+                                    {{ hab.author }}
+                                </a>
+                            </span>
+                        </li>
+
+                        <li class="d-flex align-items-center"><i class="bi bi-clock"></i>
+                            <a>{{ hab.publication_date }}</a></li>
+                        <li class="d-flex align-items-center"><i class="bi bi-chat-dots"></i>
+                            <a>Комментариев: {{hab.comments_habs.all.count }}</a>
+                        </li>
+                        <li class="d-flex align-items-center"><i class="bi bi-bar-chart"></i> <a
+                                 href="{% url 'hab:detail' hab.pk %}">Рейтинг: {{ hab.rating }}</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="entry-content">
+                    <div class="read-more">
+                        <a href="{% url 'hab:detail' hab.pk %}">Читать далее</a>
                     </div>
+                </div>
 
-                    <h4 class="main_center_block_hab_text">
-                        {{ i.content|slice:":150" }}...
-                    </h4>
-
-                    <div class="main_center_block_hab_bottoms">
-                        <div class="main_center_block_hab_btm">
-                            <a class="main_center_block_hab_btm_a" href="">Лайк</a>
-                        </div>
-                        <div class="main_center_block_hab_btm">
-                            <a class="main_center_block_hab_btm_a" href="#">Комментарии</a>
-                        </div>
-                    </div>
                 </article>
             {% endfor %}
 
