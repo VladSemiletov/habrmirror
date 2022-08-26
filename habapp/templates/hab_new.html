@@ -14,7 +14,7 @@
             <div class="article-edit-form"><h4>Новая статья</h4>
                 <form action="" method="post">{% csrf_token %}
                     {{ form.media | safe }}
-                    {{ form.content | safe }}
+
                     {{ form.as_p }}
                     <button type="submit" class="btn btn-primary">Создать</button>
                 </form>
