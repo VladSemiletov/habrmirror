@@ -13,11 +13,11 @@ class HabUser(AbstractUser):
     MODERATOR = 'M'
     ADMINISTRATOR = "A"
 
-    ROLE_CHOICES = {
+    ROLE_CHOICES = (
         (USER, 'Зарегистрированный пользователь'),
         (MODERATOR, 'Модератор'),
         (ADMINISTRATOR, 'Администратор'),
-    }
+    )
     avatar = models.ImageField(
         upload_to='users_avatars',
         blank=True,
@@ -27,7 +27,7 @@ class HabUser(AbstractUser):
     # activation_key_expires = models.DateTimeField(
     #     default=(now() + timedelta(hours=48)))
     role = models.CharField(verbose_name='роль', max_length=1, choices=ROLE_CHOICES, default=USER)
-    is_block = models.DateTimeField(verbose_name='дата конца блокировки', default=now)
+    is_block = models.DateTimeField(verbose_name='дата конца блокировки', auto_now_add=True)
 
     # def is_activation_key_expired(self):
     #     if now() < self.activation_key_expires:
@@ -61,10 +61,10 @@ class HabProfile(models.Model):
     MALE = 'M'
     FEMALE = "W"
 
-    GENDER_CHOICES = {
+    GENDER_CHOICES = (
         (MALE, 'M'),
         (FEMALE, 'Ж')
-    }
+    )
 
     user = models.OneToOneField(
         HabUser, unique=True, null=False, db_index=True, on_delete=models.CASCADE)
