@@ -39,13 +39,10 @@ sqlite3 habrmirror.db
 Для запуска проекта локально выполним следующие команды:
 ```
 ~$ python3 manage.py makemigrations
-~$ python3 manage.py migrate
 ~$ python3 manage.py migrate --run-syncdb 
-
+~$ python manage.py createsuperuser
+~$ python3 manage.py loaddata fixtures/fixtures.json
 ~$ python3 manage.py runserver
-
-
-~$ python manage.py loaddata fixtures/fixtures.json
 ```
 В фикстурах добавляется 4 категории и 12 статей.
 ```

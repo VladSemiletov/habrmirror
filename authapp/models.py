@@ -27,7 +27,7 @@ class HabUser(AbstractUser):
     # activation_key_expires = models.DateTimeField(
     #     default=(now() + timedelta(hours=48)))
     role = models.CharField(verbose_name='роль', max_length=1, choices=ROLE_CHOICES, default=USER)
-    is_block = models.DateTimeField(verbose_name='дата конца блокировки', auto_now_add=True)
+    is_block = models.DateTimeField(verbose_name='дата конца блокировки', default=now)
 
     # def is_activation_key_expired(self):
     #     if now() < self.activation_key_expires:
