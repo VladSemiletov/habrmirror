@@ -10,11 +10,11 @@
                 <span></span>
 
                 <ul id="menu">
-                    <li><a href="#">Главная</a></li>
+                    <li><a href="{% url 'main:index' %}">Главная</a></li>
                     {% for cat in categories %}
                     <li><a href="{% url 'hab:hab_category' cat.id %}">{{cat.name}}</a></li>
                     {% endfor %}
-                    <li><a href="#">Помощь</a></li>
+                    <li><a href="{% url 'main:help' %}">Помощь</a></li>
                 </ul>
             </div>
         </nav>
