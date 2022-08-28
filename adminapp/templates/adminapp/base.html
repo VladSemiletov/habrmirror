@@ -40,7 +40,8 @@
     {% endblock load_procesing %}
 
     {% block header %}
-
+        {% include 'mainapp/includes/inc_topbar.html' %}
+        {% include 'mainapp/includes/inc_menu.html' %}
     {% endblock header %}
 
 
@@ -49,7 +50,7 @@
         {% endblock content %}
     </main>
     {% block footer %}
-
+    {% include 'mainapp/includes/inc_footer.html' %}
     {% endblock footer %}
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
