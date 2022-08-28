@@ -31,7 +31,7 @@
                 </p>
                 <p>{{ hab.category }}</p>
                 <p>{{ hab.content | safe }}</p>
-                {#<p>{{ hab.image }}</p>#}
+                <p>{{ hab.image }}</p>
             </div>
             {% if request.user == hab.author and not request.user.check_block %}
             <div class="row">

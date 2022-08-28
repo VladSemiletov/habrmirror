@@ -38,7 +38,9 @@
         <div class="main_center_block">
             <h2 class="main_center_block_title">Все потоки</h2>
             <hr>
+
             {% for hab in hab %}
+            {% if hab.status == 'PB' and hab.approve %}
             <article class="entry">
 
                 <div class="entry-img">
@@ -91,6 +93,7 @@
                 </div>
 
                 </article>
+            {% endif %}
             {% endfor %}
 
             <nav class="blog-pagination" aria-label="Pagination">
