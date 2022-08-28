@@ -8,3 +8,7 @@ pycache/
 !/migrations
 !/migrations/init.py
 /tmp/email-messages/
+.pyre/
+tmp/
+media/
+migrations/
