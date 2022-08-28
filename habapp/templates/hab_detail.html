@@ -84,7 +84,7 @@
                             id="{{hab.pk}}">
                         {% csrf_token %}
                         <input type="hidden" name="hab_id" value="{{hab.pk}}">
-                        <button type="submit" class="btn btn-success btn-sm like-btn {{hab.pk}} ">
+                        <button type="submit" class="btn btn-success btn-sm like-btn {{hab.pk}} " onClick="window.location.reload();">
                         {% if user not in hab.liked.all %}Нравится{% else %}Не нравится{% endif %}
                         </button>
                     </form>
