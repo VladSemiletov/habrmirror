@@ -31,7 +31,7 @@
                 </p>
                 <p>{{ hab.category }}</p>
                 <p>{{ hab.content | safe }}</p>
-                <p>{{ hab.image }}</p>
+                {#<p>{{ hab.image }}</p>#}
             </div>
             {% if request.user == hab.author and not request.user.check_block %}
             <div class="row">
@@ -84,7 +84,7 @@
                             id="{{hab.pk}}">
                         {% csrf_token %}
                         <input type="hidden" name="hab_id" value="{{hab.pk}}">
-                        <button type="submit" class="btn btn-success btn-sm like-btn {{hab.pk}} " onClick="window.location.reload();">
+                        <button type="submit" class="btn btn-success btn-sm like-btn{{hab.pk}}">
                         {% if user not in hab.liked.all %}Нравится{% else %}Не нравится{% endif %}
                         </button>
                     </form>
