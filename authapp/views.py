@@ -54,7 +54,7 @@ class VerifyView(TemplateView):
                 return HttpResponseRedirect(reverse('main'))
             else:
                 print(f'ошибка активации пользователя: {user}')
-                return render(request, 'authapp/auth/verification.html')
+                return render(request, 'authapp/verification.html')
         except Exception as ex:
             return HttpResponseRedirect(reverse('main'))
 
@@ -62,7 +62,7 @@ class VerifyView(TemplateView):
 # @csrf_exempt
 class LoginUserView(LoginView):
     """ Контроллер входа в системы """
-    template_name = 'authapp/auth/login.html'
+    template_name = 'authapp/login.html'
     form_class = UserLoginForm
 
 
@@ -74,7 +74,7 @@ class LogoutUserView(LogoutView):
 
 
 class RegisterUserView(SuccessMessageMixin, CreateView):
-    template_name = 'authapp/auth/register.html'
+    template_name = 'authapp/register.html'
     success_url = reverse_lazy('auth:login')
     form_class = UserRegisterForm
     success_message = "Your profile was created successfully"
@@ -89,13 +89,13 @@ class RegisterUserView(SuccessMessageMixin, CreateView):
                 if HabUser.objects.all().filter(email=register_form.data['email']):
                     context = {
                         'error': f'пользователь уже зарегистрирован с данным EMAIL:{register_form.data["email"]}'}
-                    return render(request, 'authapp/auth/error.html', context)
+                    return render(request, 'authapp/error.html', context)
                 user = register_form.save()
                 # SendVerifyMail(user)
                 return HttpResponseRedirect(reverse('auth:login'))
             else:
                 context = {'error': f'Форма заполнена не корректна'}
-                return render(request, 'authapp/auth/error.html', context)
+                return render(request, 'authapp/error.html', context)
         else:
             return render(
                 request,
@@ -108,90 +108,7 @@ def messages(request):
     if request.method == 'POST':
         return HttpResponseRedirect(reverse('messages'))
 
-    return render(request, 'authapp/account/messages.html')
-
-'''
-В дальнейшем удалить повтор кода, так как давно создан в Habapp. вдобавок форма создания статьи не френдли даже к админу'''
-# def habs_test(request):
-#     hab_form = HabForm()
-#     if request.method == 'POST':
-#         hab_form = HabForm(request.POST)
-#         if hab_form.is_valid():
-#             hab_form.save()
-#             return HttpResponseRedirect(reverse('habs_test'))
-#     else:
-#         context = {
-#             'hab_form': hab_form
-#         }
-#         return render(request, 'authapp/account/habs.html', context)
-
-
-# def create_hab(request):
-#     hab_form = HabForm()
-#     context = {}
-#     context_update(context, key='Title', value='create_hab')
-#     context_update(context, key='author', value=int(request.user.id))
-#     context_update(context, key='hab_form', value=hab_form)
-#
-#     return render(request, 'authapp/account/hab_c.html', context)
-#
-#
-# def save_form(request):
-#     if request.method == 'POST':
-#         hab_form = HabForm(request.POST, request.FILES)
-#         if hab_form.is_valid():
-#             hab_form.save()
-#             return HttpResponseRedirect(reverse('auth:habs'))
-#         else:
-#             return HttpResponseRedirect(reverse('main:index'))
-#
-# #
-# def update_hab(request, pk: uuid):
-#     hab = Hab.objects.get(uid=pk)
-#     hab_form = HabForm(instance=hab)
-#     context = {}
-#     context_update(context, key='Title', value='create_hab')
-#     context_update(context, key='author', value=request.user)
-#     context_update(context, key='hab_form', value=hab_form)
-#     context_update(context, key='habs', value=hab)
-#     context_update(context, key='update', value=now())
-#     return render(request, 'authapp/account/hab_c.html', context)
-#
-# def hab_set(request):
-#     author = request.user.id
-#     habs = Hab.objects.all().filter(author=author)
-#     context = {}
-#     context_update(context, key='habs', value=habs)
-#     return render(request, 'authapp/account/habs.html', context)
-#
-# def read_hab(request, pk: int):
-#     hab_form = HabForm
-#     hab = Hab.objects.get(pk=pk)
-#     context = {}
-#     context_update(context, key='Title', value='create_hab')
-#     context_update(context, key='user', value=HabUser)
-#     context_update(context, key='hab_form', value=hab_form)
-#     context_update(context, key='hab', value=hab)
-#     hab_form = HabForm(instance=hab)
-#     context_update(context, key='hab_form', value=hab_form)
-#     return render(request, 'authapp/account/habs.html', context)
-#
-# #
-# def delete_hab(request, pk: uuid):
-#     hab = Hab.objects.get(uid=pk)
-#     context = {}
-#     context_update(context, key='Title', value='create_hab')
-#     context_update(context, key='author', value=request.user)
-#     context_update(context, key='habs', value=hab)
-#     context_update(context, key='update', value=now())
-#     if request.method == 'GET':
-#         hab.status = 'DT'
-#         hab.save()
-#         return render(request, 'authapp/account/habs.html', context)
-#     else:
-#         return HttpResponseRedirect(reverse('index'))
-# #
-
+    return render(request, 'authapp/messages.html')
 
 
 class UserIsUserMixin(UserPassesTestMixin):
@@ -204,7 +121,7 @@ class UserIsUserMixin(UserPassesTestMixin):
 class ProfileEditView(LoginRequiredMixin, UpdateView):
     """ Редактирование профиля """
     model = HabUser
-    template_name = 'authapp/account/account.html'
+    template_name = 'authapp/edit.html'
     form_class = UserEditForm
     second_form_class = ProfileEditForm
 
@@ -236,7 +153,7 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
 class UserDetailView(DetailView):
     """ Страница профиля """
     model = HabUser
-    template_name = 'authapp/account/account.html'
+    template_name = 'authapp/user_detail.html'
     context_object_name = 'object'
 
     def get_context_data(self, **kwargs):
@@ -261,7 +178,7 @@ class UserDetailView(DetailView):
 
 class UserChangePassword(LoginRequiredMixin, PasswordChangeView):
     """ Сменя пароля """
-    template_name = 'auth/change_pass.html'
+    template_name = 'authapp/change_pass.html'
     form_class = PasswordChangeForm
 
     def get_success_url(self):

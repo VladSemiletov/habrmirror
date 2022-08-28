@@ -1,19 +1,15 @@
-{% extends 'mainapp/base.html' %}
-{% load static %}
+<!-- ======= Featured Section ======= -->
+<section id="blog" class="blog">
+    <div class="container">
+        <div class="row">
 
-{% block css %}
-    <link href="{% static 'adminapp/css/admin_style.css' %}" rel="stylesheet">
-{% endblock css %}
-
-{% block content %}
-
-    <section id="blog" class="blog">
-        <div class="container">
-
+        {% block content %}
             {% for hab in hab %}
                 <article class="entry">
                     <h2 class="entry-title">
-                        <a href="{% url 'hab:detail' hab.pk %}">{{ hab.title }}</a>
+                        <a href="{% url 'hab:detail' hab.pk %}">
+                            {{ hab.title }}
+                        </a>
                     </h2>
                     <div class="entry-meta">
                         <ul>
@@ -36,24 +32,16 @@
                             <li class="d-flex align-items-center"><i class="bi bi-bar-chart"></i> <a
                                     href="{% url 'hab:detail' hab.pk %}">Рейтинг: {{ hab.rating }}</a>
                             </li>
-
                         </ul>
                     </div>
-
                     <div class="entry-content">
-                        <p>
-                            {{ hab.content | safe | truncatechars_html:500 }}
-                        </p>
-                        <div class="read-more">
-                            <a href="{% url 'hab:detail' hab.pk %}">Дальше</a>
-                        </div>
+                        {{ hab.content | safe | truncatechars_html:500 }}
                     </div>
-
                 </article>
-                <!-- End blog entry -->
             {% endfor %}
-            {% include "paginator.html" %}
-
+        {% endblock content %}
+        {% include "paginator.html" %}
         </div>
-    </section><!-- End Blog Section -->
-{% endblock content %}
+    </div>
+</section><!-- End Featured Section -->
+

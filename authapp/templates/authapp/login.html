@@ -1,5 +1,4 @@
-{% extends 'authapp/auth/base.html' %}
-
+{% extends 'authapp/base.html' %}
 {% load static %}
 
 {% block content %}
@@ -9,24 +8,26 @@
         <div class="col-md-4 col-md-offset-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Ошибка</h3>
+                    <h3 class="panel-title">Войти на сайт</h3>
                 </div>
                 <div class="panel-body">
                     <form accept-charset="UTF-8" role="form" action="{% url 'auth:login' %}" method="post">
                         {% csrf_token %}
                         <fieldset>
-                            {{ error }}
+                            {% if next %}
+                                <input type="hidden" name="next" value="{{ next }}">
+                            {% endif %}
+                            {{ form.as_p }}
                             <br>
                             <input class="btn btn-lg btn-success btn-block" type="submit" value="Войти">
                             <bottom class="btn btn-lg btn-primary btn-block">
                                 <a href="{% url 'auth:register' %}"> Зарегистрироваться </a>
                             </bottom>
-                            <bottom class="btn btn-lg btn-info btn-block">
-                                <a href="{% url 'main' %}"> На главную </a>
-                            </bottom>
+
                         </fieldset>
                     </form>
                     <hr/>
+
                 </div>
             </div>
         </div>
@@ -34,4 +35,9 @@
 </div>
     <br><br><br>
 
+{#    <button class="btn btn-round form-control">#}
+{#        <a href="{% url 'social:begin' 'vk-oauth2' %}?next=/" class="">#}
+{#            Войти через VK#}
+{#        </a>#}
+{#    </button>#}
 {% endblock %}
