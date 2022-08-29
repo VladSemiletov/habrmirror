@@ -6,9 +6,10 @@ from mainapp.service_mainapp import last_hub
 
 
 def main(request):
-    content = {}
-    context_update(content, "title", "Main")
-    context_update(content, "hab", last_hub(10))
+    title = "Main"
+
+    content = {"title": title}
+
     return render(request, "mainapp/index.html", content)
 
 

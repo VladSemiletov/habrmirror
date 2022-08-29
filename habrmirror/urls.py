@@ -24,9 +24,9 @@ from mainapp.views import about, help
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('_admin/', include('adminapp.urls', namespace='_admin')),
-    path('', include('mainapp.urls', namespace='main')),
+    path('temp/', include('mainapp.urls')),
     path('auth/', include('authapp.urls', namespace='auth')),
-    path('hab/', include('habapp.urls', namespace='hab')),
+    path('', include('habapp.urls', namespace='hab')),
     # path('', include('social_django.urls', namespace='social')),
     # path('', include('searchapp.urls', namespace='search')),
     path('notification/', include('notificationapp.urls', namespace='notify')),

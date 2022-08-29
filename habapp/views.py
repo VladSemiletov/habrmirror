@@ -21,7 +21,7 @@ class IndexView(ListView):
     класс - Index
     """
     queryset = add_rating(Hab.objects.filter(approve=True))
-    paginate_by = 4
+    paginate_by = 5
     template_name = 'mainapp/index.html'
     ordering = ('-publication_date', '-created')
 
