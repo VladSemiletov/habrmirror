@@ -36,12 +36,12 @@
             {% if request.user == hab.author and not request.user.check_block %}
             <div class="row">
                 <div class="col-sm-2 d-flex justify-content-center">
-                    <a class=" btn btn-secondary btn-block w-100" style="background-color: #e96b56; border-color: #e96b56;"
+                    <a class=" btn btn-secondary btn-block w-100" style="background-color: #6f42c1; border-color: #6f42c1;"
                        href="{% url 'hab:edit' hab.pk %}">Редактировать</a>
                 </div>
                 {% if hab.status != 'DT'%}
                 <div class="col-sm-2 d-flex justify-content-center">
-                    <a class="btn btn-secondary btn-block w-100" style="background-color: #e96b56; border-color: #e96b56;"
+                    <a class="btn btn-secondary btn-block w-100" style="background-color: #6f42c1; border-color: #6f42c1;"
                        href="{% url 'hab:delete' hab.pk %}">Удалить</a>
                 </div>
                 {% endif %}
@@ -50,7 +50,7 @@
                     <form method="POST" class="w-100 mar-b-5" action="{% url 'hab:public' hab.pk %}">
                         {% csrf_token %}
                         <input class="btn btn-secondary btn-block w-100 d-flex justify-content-center" type="submit"
-                            style="background-color: #e96b56; border-color: #e96b56;" value="Опубликовать">
+                            style="background-color: #6f42c1; border-color: #6f42c1;" value="Опубликовать">
                     </form>
                 </div>
                 {% endif %}
