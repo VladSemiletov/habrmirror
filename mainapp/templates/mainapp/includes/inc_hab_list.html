@@ -4,7 +4,7 @@
         <div class="row">
 
         {% block content %}
-            {% for hab in hab %}
+            {% for hab in object_list %}
                 <article class="entry">
                     <h2 class="entry-title">
                         <a href="{% url 'hab:detail' hab.pk %}">
@@ -44,4 +44,3 @@
         </div>
     </div>
 </section><!-- End Featured Section -->
-
