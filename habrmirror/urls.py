@@ -30,8 +30,8 @@ urlpatterns = [
     # path('', include('social_django.urls', namespace='social')),
     # path('', include('searchapp.urls', namespace='search')),
     path('notification/', include('notificationapp.urls', namespace='notify')),
-    # path('about/', about, name='about'),
-    # path('help/', help, name='help'),
+    path('about/', about, name='about'),
+    path('help/', help, name='help'),
 ]
 
 if settings.DEBUG:
