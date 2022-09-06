@@ -1,5 +1,9 @@
+import uuid
+from urllib.request import Request
+
 from django.core.mail import send_mail
 from django.conf import settings
+from django.http import HttpResponse
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404
 from django.contrib import auth
 from django.urls import reverse
@@ -11,10 +15,10 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.utils.timezone import now
 
-
+from core.context_service import context_update
 from habapp.models import Hab
 from authapp.forms import UserLoginForm, UserRegisterForm, UserEditForm, ProfileEditForm, HabForm, PasswordChangeForm
-from authapp.models import HabUser
+from authapp.models import HabUser, HabProfile
 from notificationapp.models import NotifyUser
 from ratingapp.models import AuthorRating
 
@@ -50,7 +54,7 @@ class VerifyView(TemplateView):
                 return HttpResponseRedirect(reverse('main'))
             else:
                 print(f'ошибка активации пользователя: {user}')
-                return render(request, 'authapp/auth/verification.html')
+                return render(request, 'authapp/verification.html')
         except Exception as ex:
             return HttpResponseRedirect(reverse('main'))
 
@@ -58,7 +62,7 @@ class VerifyView(TemplateView):
 # @csrf_exempt
 class LoginUserView(LoginView):
     """ Контроллер входа в системы """
-    template_name = 'authapp/auth/login.html'
+    template_name = 'authapp/login.html'
     form_class = UserLoginForm
 
 
@@ -70,7 +74,7 @@ class LogoutUserView(LogoutView):
 
 
 class RegisterUserView(SuccessMessageMixin, CreateView):
-    template_name = 'authapp/auth/register.html'
+    template_name = 'authapp/register.html'
     success_url = reverse_lazy('auth:login')
     form_class = UserRegisterForm
     success_message = "Your profile was created successfully"
@@ -85,13 +89,13 @@ class RegisterUserView(SuccessMessageMixin, CreateView):
                 if HabUser.objects.all().filter(email=register_form.data['email']):
                     context = {
                         'error': f'пользователь уже зарегистрирован с данным EMAIL:{register_form.data["email"]}'}
-                    return render(request, 'authapp/auth/error.html', context)
+                    return render(request, 'authapp/error.html', context)
                 user = register_form.save()
-                SendVerifyMail(user)
+                # SendVerifyMail(user)
                 return HttpResponseRedirect(reverse('auth:login'))
             else:
                 context = {'error': f'Форма заполнена не корректна'}
-                return render(request, 'authapp/auth/error.html', context)
+                return render(request, 'authapp/error.html', context)
         else:
             return render(
                 request,
@@ -104,21 +108,7 @@ def messages(request):
     if request.method == 'POST':
         return HttpResponseRedirect(reverse('messages'))
 
-    return render(request, 'authapp/account/messages.html')
-
-
-def habs_test(request):
-    if request.method == 'POST':
-        hab_form = HabForm(request.POST)
-        if hab_form.is_valid():
-            return HttpResponseRedirect(reverse('habs_test'))
-    else:
-        hab_form = HabForm()
-
-    context = {
-        'hab_form': hab_form
-    }
-    return render(request, 'authapp/account/habs.html', context)
+    return render(request, 'authapp/messages.html')
 
 
 class UserIsUserMixin(UserPassesTestMixin):
@@ -131,7 +121,7 @@ class UserIsUserMixin(UserPassesTestMixin):
 class ProfileEditView(LoginRequiredMixin, UpdateView):
     """ Редактирование профиля """
     model = HabUser
-    template_name = 'authapp/auth/edit.html'
+    template_name = 'authapp/edit.html'
     form_class = UserEditForm
     second_form_class = ProfileEditForm
 
@@ -144,13 +134,13 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
         if 'form' not in context:
             context['form'] = self.form_class(instance=self.object)
         if 'form2' not in context:
-            context['form2'] = self.second_form_class(instance=self.object.habrprofile)
+            context['form2'] = self.second_form_class(instance=HabProfile.objects.get(id=self.kwargs['pk']))
         context['avatar'] = self.object.avatar
         return context
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
-        form2 = self.second_form_class(request.POST, instance=self.object.habrprofile)
+        form2 = self.second_form_class(request.POST, instance=HabProfile.objects.get(id=self.kwargs['pk']))
         form = self.form_class(request.POST, instance=self.object)
         if form.is_valid() and form2.is_valid():
             form2.save()
@@ -163,7 +153,7 @@ class ProfileEditView(LoginRequiredMixin, UpdateView):
 class UserDetailView(DetailView):
     """ Страница профиля """
     model = HabUser
-    template_name = 'authapp/account/account.html'
+    template_name = 'authapp/user_detail.html'
     context_object_name = 'object'
 
     def get_context_data(self, **kwargs):
@@ -188,8 +178,17 @@ class UserDetailView(DetailView):
 
 class UserChangePassword(LoginRequiredMixin, PasswordChangeView):
     """ Сменя пароля """
-    template_name = 'auth/change_pass.html'
+    template_name = 'authapp/change_pass.html'
     form_class = PasswordChangeForm
 
     def get_success_url(self):
         return reverse('auth:profile', kwargs={'pk': self.request.user.pk})
+
+
+def notification_view(request: Request, user_id: int) -> HttpResponse:
+    """Конроллер для страницы уведомлений пользователя"""
+    context ={}
+    notification_to_user = NotifyUser.objects.select_related('hab').filter(user_to=user_id)
+    context_update(context, 'notify', notification_to_user )
+
+    return render(request, 'authapp/account/notification.html', context)

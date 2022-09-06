@@ -55,12 +55,12 @@ class UserRegisterForm(UserCreationForm):
     # def save(self, *args, **kwargs):
         user = super().save()
 
-        user.is_active = False
-        salt = hashlib.sha1(
-            str(random.random()).encode('utf8')).hexdigest()[:6]
-
-        user.activation_key = hashlib.sha1(
-            (user.email + salt).encode('utf8')).hexdigest()
+        user.is_active = True
+        # salt = hashlib.sha1(
+        #     str(random.random()).encode('utf8')).hexdigest()[:6]
+        #
+        # user.activation_key = hashlib.sha1(
+        #     (user.email + salt).encode('utf8')).hexdigest()
         user.save()
 
         return user
@@ -134,7 +134,7 @@ class HabForm(forms.ModelForm):
 
     class Meta:
         model = Hab
-        exclude = ('author', 'description', 'category',)
+        exclude = 'category', 'created', 'updated', 'status', 'liked', 'approve', 'publication_date'
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

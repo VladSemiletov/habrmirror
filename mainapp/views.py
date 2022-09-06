@@ -1,5 +1,9 @@
 from django.shortcuts import render
 
+from core.context_service import context_update
+from habapp.models import Like
+from mainapp.service_mainapp import last_hub
+
 
 def main(request):
     title = "Main"

@@ -21,7 +21,7 @@ class IndexView(ListView):
     класс - Index
     """
     queryset = add_rating(Hab.objects.filter(approve=True))
-    paginate_by = 4
+    paginate_by = 5
     template_name = 'mainapp/index.html'
     ordering = ('-publication_date', '-created')
 
@@ -33,7 +33,7 @@ class HabListView(ListView):
     """
     model = Hab
     paginate_by = 5
-    template_name = 'hab_list.html'
+    template_name = 'habs_list.html'
 
     def get_queryset(self):
         """
@@ -120,7 +120,7 @@ class HabDeleteView(UserIsNoBlockMixin, DeleteView):
     """
     model = Hab
     template_name = 'hab_delete.html'
-    success_url = reverse_lazy(main)
+    success_url = reverse_lazy('hab:list')
 
 
 class HabPublished(UserIsNoBlockMixin, DeleteView):
