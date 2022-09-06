@@ -40,7 +40,7 @@ sqlite3 habrmirror.db
 ```
 ~$ python3 manage.py makemigrations
 ~$ python3 manage.py migrate --run-syncdb 
-~$ python manage.py createsuperuser
+~$ python3 manage.py createsuperuser
 ~$ python3 manage.py loaddata fixtures/fixtures.json
 ~$ python3 manage.py runserver
 ```
